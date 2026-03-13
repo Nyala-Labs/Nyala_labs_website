@@ -1,0 +1,186 @@
+@import "tailwindcss";
+
+@theme {
+  --color-nyala-red: #c62828;
+  --color-nyala-red-light: #ef5350;
+  --color-nyala-red-dark: #8e0000;
+  --color-nyala-yellow: #fbc02d;
+  --color-nyala-yellow-light: #fff176;
+  --color-nyala-yellow-dark: #c49000;
+  --color-nyala-white: #fafafa;
+  --color-nyala-black: #0a0a0a;
+  --color-nyala-gray: #1a1a1a;
+  --color-nyala-gray-light: #2a2a2a;
+  --color-nyala-gray-muted: #6b6b6b;
+
+  --font-mono: var(--font-jetbrains), "Fira Code", "Courier New", monospace;
+  --font-pixel: var(--font-pixelify), cursive;
+
+  --animate-blink: blink 1s step-end infinite;
+  --animate-grain: grain 0.5s steps(1) infinite;
+  --animate-float: float 6s ease-in-out infinite;
+  --animate-glow-pulse: glow-pulse 2s ease-in-out infinite;
+  --animate-draw-line: draw-line 1.5s ease-out forwards;
+}
+
+@keyframes blink {
+
+  0%,
+  100% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0;
+  }
+}
+
+@keyframes grain {
+
+  0%,
+  100% {
+    transform: translate(0, 0);
+  }
+
+  10% {
+    transform: translate(-5%, -10%);
+  }
+
+  20% {
+    transform: translate(-15%, 5%);
+  }
+
+  30% {
+    transform: translate(7%, -25%);
+  }
+
+  40% {
+    transform: translate(-5%, 25%);
+  }
+
+  50% {
+    transform: translate(-15%, 10%);
+  }
+
+  60% {
+    transform: translate(15%, 0%);
+  }
+
+  70% {
+    transform: translate(0%, 15%);
+  }
+
+  80% {
+    transform: translate(3%, 35%);
+  }
+
+  90% {
+    transform: translate(-10%, 10%);
+  }
+}
+
+@keyframes float {
+
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes glow-pulse {
+
+  0%,
+  100% {
+    text-shadow: 0 0 4px rgba(251, 192, 45, 0.3);
+  }
+
+  50% {
+    text-shadow: 0 0 20px rgba(251, 192, 45, 0.6), 0 0 40px rgba(251, 192, 45, 0.2);
+  }
+}
+
+@keyframes draw-line {
+  from {
+    width: 0;
+  }
+
+  to {
+    width: 100%;
+  }
+}
+
+/* ─── base ──────────────────────────────────────── */
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-mono);
+  background-color: var(--color-nyala-black);
+  color: var(--color-nyala-white);
+  overflow-x: hidden;
+}
+
+::selection {
+  background-color: var(--color-nyala-red);
+  color: var(--color-nyala-white);
+}
+
+/* ─── scrollbar ─────────────────────────────────── */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-nyala-black);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-nyala-red);
+  border-radius: 3px;
+}
+
+/* ─── grain overlay ─────────────────────────────── */
+.grain-overlay {
+  position: fixed;
+  top: -50%;
+  left: -50%;
+  right: -50%;
+  bottom: -50%;
+  width: 200%;
+  height: 200%;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 9999;
+  animation: var(--animate-grain);
+  opacity: 0.5;
+}
+
+/* ─── typing cursor ─────────────────────────────── */
+.cursor-blink::after {
+  content: "▋";
+  animation: var(--animate-blink);
+  color: var(--color-nyala-yellow);
+  margin-left: 2px;
+}
+
+/* ─── glow text ─────────────────────────────────── */
+.glow-text {
+  animation: var(--animate-glow-pulse);
+}
+
+/* ─── page transitions ──────────────────────────── */
+.page-enter {
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+.page-enter-active {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}

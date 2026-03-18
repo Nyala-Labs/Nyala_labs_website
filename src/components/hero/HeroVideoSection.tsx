@@ -3,20 +3,38 @@
 import { useState, useEffect, useRef, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import TypingTagline from "./TypingTagline";
-import { taglines, heroMedia } from "@/data/mock";
+import { taglines } from "@/data/mock";
+import { fetchHomepage } from "@/lib/cms-client";
+import type { HeroMediaItem } from "@/types";
+
+const fallbackHeroMedia: HeroMediaItem[] = [
+  { type: "image", src: "/images/hero-1.jpg", alt: "Nyala Team Hackathon" },
+  { type: "image", src: "/images/hero-2.jpg", alt: "Nyala Workshop Session" },
+  { type: "image", src: "/images/hero-3.jpg", alt: "Nyala Community Event" },
+];
 
 export default function HeroVideoSection() {
+  const [heroMedia, setHeroMedia] = useState<HeroMediaItem[]>(fallbackHeroMedia);
   const [currentMediaIndex, setCurrentMediaIndex] = useState(0);
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
   const containerRef = useRef<HTMLDivElement>(null);
 
+  useEffect(() => {
+    fetchHomepage().then((data) => {
+      if (data.heroMedia.length > 0) {
+        setHeroMedia(data.heroMedia);
+      }
+    });
+  }, []);
+
   // rotate media independently from taglines
   useEffect(() => {
+    if (heroMedia.length === 0) return;
     const interval = setInterval(() => {
       setCurrentMediaIndex((prev) => (prev + 1) % heroMedia.length);
     }, 6000);
     return () => clearInterval(interval);
-  }, []);
+  }, [heroMedia.length]);
 
   const handleMouseMove = useCallback(
     (e: React.MouseEvent<HTMLDivElement>) => {
@@ -55,17 +73,17 @@ export default function HeroVideoSection() {
           }}
           className="absolute inset-0 -m-4"
         >
-          {heroMedia[currentMediaIndex].type === "image" ? (
+          {heroMedia[currentMediaIndex]?.type === "image" ? (
             <div
               className="h-full w-full bg-cover bg-center"
               style={{
-                backgroundImage: `url(${heroMedia[currentMediaIndex].src})`,
+                backgroundImage: `url(${heroMedia[currentMediaIndex]?.src})`,
                 filter: "brightness(0.3) contrast(1.1) saturate(0.8)",
               }}
             />
           ) : (
             <video
-              src={heroMedia[currentMediaIndex].src}
+              src={heroMedia[currentMediaIndex]?.src}
               autoPlay
               muted
               loop
@@ -139,7 +157,7 @@ export default function HeroVideoSection() {
           className="mt-10 flex flex-col items-center gap-4 sm:flex-row sm:justify-center"
         >
           <a
-            href="https://forms.google.com"
+            href="https://forms.gle/f3g69MxUrquDFWQZ9"
             target="_blank"
             rel="noopener noreferrer"
             className="group relative overflow-hidden border border-nyala-red bg-nyala-red px-8 py-3 font-mono text-xs uppercase tracking-[0.2em] text-nyala-white transition-all duration-300 hover:bg-nyala-red-dark hover:shadow-lg hover:shadow-nyala-red/20"

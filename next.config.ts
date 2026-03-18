@@ -1,14 +1,8 @@
 import type { NextConfig } from "next";
+import { withPayload } from "@payloadcms/next/withPayload";
 
 const nextConfig: NextConfig = {
-  images: {
-    remotePatterns: [
-      {
-        protocol: "https",
-        hostname: "cdn.sanity.io",
-      },
-    ],
-  },
+  serverExternalPackages: ["@libsql/client", "libsql", "@payloadcms/db-sqlite"],
 };
 
-export default nextConfig;
+export default withPayload(nextConfig);

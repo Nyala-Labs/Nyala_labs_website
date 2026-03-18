@@ -57,7 +57,7 @@ export type BlogPost = {
   categories: string[];
   publishedAt: string;
   readingTime: number;
-  featured: boolean;
+  featured?: boolean;
 };
 
 export type CommitteeMember = {
@@ -66,6 +66,27 @@ export type CommitteeMember = {
   role: string;
   image: string;
   bio: string;
-  linkedin: string;
+  linkedin?: string;
   order: number;
+};
+
+export type Activity = {
+  _id: string;
+  title: string;
+  description: string;
+  date: string;
+  location: string;
+  image: string;
+  status: string;
+};
+
+export type HeroMediaItem = {
+  type: "image" | "video";
+  src: string;
+  alt?: string;
+};
+
+export type HighlightItem = {
+  image: string;
+  caption?: string;
 };

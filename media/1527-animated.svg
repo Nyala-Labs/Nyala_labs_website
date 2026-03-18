@@ -1,0 +1,116 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 800" width="800" height="800">
+  <rect width="800" height="800" fill="#000"/>
+  <defs>
+    <radialGradient id="bg-glow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#0a1520" stop-opacity="0.6"/>
+      <stop offset="100%" stop-color="#000" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="soft-glow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="1.5" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  <circle cx="400" cy="400" r="350" fill="url(#bg-glow)"/>
+  <g id="particles"></g>
+  <script type="text/javascript">
+  <![CDATA[
+    (function() {
+      var g = document.getElementById('particles');
+      var CX = 400, CY = 400, BASE_R = 230;
+      var NUM_LAT = 50, MAX_LON = 70;
+
+      var pts = [];
+      var i, j, phi, sinP, cosP, theta, lonCount, nx, ny, nz;
+
+      for (i = 0; i < NUM_LAT; i++) {
+        phi = (Math.PI * (i + 0.5)) / NUM_LAT;
+        sinP = Math.sin(phi);
+        cosP = Math.cos(phi);
+        lonCount = Math.max(6, Math.round(MAX_LON * sinP));
+        for (j = 0; j < lonCount; j++) {
+          theta = (2 * Math.PI * j) / lonCount;
+          nx = sinP * Math.cos(theta);
+          ny = cosP;
+          nz = sinP * Math.sin(theta);
+          var c = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+          c.setAttribute('r', '1.5');
+          g.appendChild(c);
+          pts.push({ nx: nx, ny: ny, nz: nz, el: c });
+        }
+      }
+
+      function displace(x, y, z, t) {
+        var d = Math.sin(x * 2.5 + t * 0.6) * Math.cos(y * 2.2 - t * 0.4) * 0.28
+              + Math.sin(y * 3.1 + z * 1.8 + t * 0.5) * 0.18
+              + Math.cos(z * 2.7 - x * 1.4 + t * 0.7) * 0.22
+              + Math.sin(x * 1.1 + y * 1.5 + z * 2.0 - t * 0.35) * 0.15
+              + Math.cos(x * 3.5 - y * 2.8 + t * 0.45) * Math.sin(z * 1.9 + t * 0.55) * 0.12;
+        return d;
+      }
+
+      var t = 0;
+      var frame = 0;
+
+      function render() {
+        t += 0.006;
+        frame++;
+
+        var rotY = t * 0.25;
+        var cRY = Math.cos(rotY), sRY = Math.sin(rotY);
+        var rotX = Math.sin(t * 0.12) * 0.25;
+        var cRX = Math.cos(rotX), sRX = Math.sin(rotX);
+        var rotZ = Math.sin(t * 0.08) * 0.1;
+        var cRZ = Math.cos(rotZ), sRZ = Math.sin(rotZ);
+
+        var p, d, r, x, y, z, x1, z1, y1, z2, x2, y2;
+        var depth, sz, op, brt, bl;
+        var len = pts.length;
+
+        for (i = 0; i < len; i++) {
+          p = pts[i];
+          d = displace(p.nx * 2.5, p.ny * 2.5, p.nz * 2.5, t);
+          r = BASE_R * (1.0 + d * 0.42);
+
+          x = r * p.nx;
+          y = r * p.ny;
+          z = r * p.nz;
+
+          x1 = x * cRY - z * sRY;
+          z1 = x * sRY + z * cRY;
+          y1 = y * cRX - z1 * sRX;
+          z2 = y * sRX + z1 * cRX;
+          x2 = x1 * cRZ - y1 * sRZ;
+          y2 = x1 * sRZ + y1 * cRZ;
+
+          depth = (z2 + BASE_R * 1.6) / (BASE_R * 3.2);
+          if (depth < 0) depth = 0;
+          if (depth > 1) depth = 1;
+
+          sz = 0.6 + depth * 3.2;
+          op = 0.05 + depth * depth * 0.9;
+
+          brt = Math.floor(120 + depth * 120 + d * 40);
+          if (brt > 255) brt = 255;
+          if (brt < 80) brt = 80;
+          bl = Math.floor(brt * 1.15);
+          if (bl > 255) bl = 255;
+
+          var el = p.el;
+          el.setAttribute('cx', (CX + x2).toFixed(1));
+          el.setAttribute('cy', (CY + y2).toFixed(1));
+          el.setAttribute('r', sz.toFixed(1));
+          el.setAttribute('opacity', op.toFixed(2));
+          el.setAttribute('fill', 'rgb(' + brt + ',' + Math.min(255, brt + 8) + ',' + bl + ')');
+        }
+
+        requestAnimationFrame(render);
+      }
+
+      render();
+    })();
+  ]]>
+  </script>
+</svg>

@@ -67,17 +67,17 @@ export default function CommitteeCard({ member, index = 0 }: CommitteeCardProps)
           }`}
           style={{
             backgroundImage: `url(${member.image})`,
-            filter: isHovered ? "grayscale(0) contrast(1.1)" : "grayscale(1)",
+            filter: isHovered ? "contrast(1.1)" : "none",
             transform: isHovered ? "scale(1.05)" : "scale(1)",
           }}
         />
-        {/* dark overlay that lightens on hover */}
+        {/* dark overlay only on hover for bio text readability */}
         <div
           className="absolute inset-0 transition-all duration-500"
           style={{
             background: isHovered
               ? "linear-gradient(to top, rgba(10,10,10,0.9) 0%, rgba(10,10,10,0.2) 60%)"
-              : "linear-gradient(to top, rgba(10,10,10,0.8) 0%, rgba(10,10,10,0.3) 100%)",
+              : "transparent",
           }}
         />
 

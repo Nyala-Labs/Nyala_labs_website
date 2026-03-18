@@ -1,7 +1,7 @@
 # nyala — blaze the trail
 
 > a modern, animation-rich website for the nyala university club.  
-> built with next.js 15, tailwind css, sanity cms, and framer motion.
+> built with next.js 15, tailwind css, payload cms, and framer motion.
 
 ---
 
@@ -12,7 +12,7 @@
 | framework | next.js 15 (app router) |
 | styling | tailwind css v4 |
 | animations | framer motion |
-| cms | sanity cms |
+| cms | payload cms |
 | language | typescript |
 | font | jetbrains mono (google fonts) |
 
@@ -22,14 +22,14 @@
 
 ```bash
 # 1. install dependencies
-npm install
+pnpm install
 
 # 2. copy environment variables
 cp .env.example .env.local
-# edit .env.local with your sanity project id
+# edit .env.local with your payload secret and database url
 
 # 3. run dev server
-npm run dev
+pnpm dev
 
 # 4. open browser
 # → http://localhost:3000
@@ -63,20 +63,16 @@ nyala/
 │   │   ├── about/           # timeline, trail path
 │   │   └── ui/              # shared: scroll reveal, grain, dividers, headings
 │   ├── lib/
-│   │   ├── sanity/          # sanity client + groq queries
+│   │   ├── cms-client.ts    # client-side payload data adapters
+│   │   ├── payload.ts       # server-side payload client helper
 │   │   ├── animations.ts    # shared framer motion variants
 │   │   └── utils.ts         # helper functions
+│   ├── collections/         # payload collection configs
+│   ├── payload.config.ts    # payload project config
 │   ├── data/
 │   │   └── mock.ts          # mock data for development
 │   └── types/
 │       └── index.ts         # typescript interfaces
-├── sanity/
-│   ├── schemas/             # cms content type schemas
-│   │   ├── blogPost.ts
-│   │   ├── committeeMember.ts
-│   │   ├── activity.ts
-│   │   └── news.ts
-│   └── sanity.config.ts     # sanity project config
 ├── package.json
 ├── tailwind.config.ts
 ├── next.config.ts
@@ -157,31 +153,27 @@ all animations use **framer motion**. shared variants live in `src/lib/animation
 
 ---
 
-## sanity cms setup
+## payload cms setup
 
-### 1. create a sanity project
+### 1. install dependencies
 
 ```bash
-# install sanity cli
-npm install -g @sanity/cli
-
-# login / init
-sanity login
-sanity init
+# install project dependencies
+pnpm install
 ```
 
 ### 2. configure environment
 
-add your project id to `.env.local`:
+add these values to `.env.local`:
 
 ```
-NEXT_PUBLIC_SANITY_PROJECT_ID=your-project-id
-NEXT_PUBLIC_SANITY_DATASET=production
+PAYLOAD_SECRET=replace-with-a-secure-random-string
+DATABASE_URL=file:./payload.db
 ```
 
-### 3. schemas
+### 3. collections
 
-four content types are pre-configured in `sanity/schemas/`:
+content types are configured in `src/collections/`:
 
 | schema | fields |
 |--------|--------|
@@ -190,20 +182,12 @@ four content types are pre-configured in `sanity/schemas/`:
 | `activity` | title, description, date, location, image, status |
 | `news` | title, slug, body, coverImage, publishedAt |
 
-### 4. switching from mock to cms data
+### 4. payload admin + api routes
 
-replace mock data imports with sanity fetch calls:
+payload admin and REST routes are mounted under:
 
-```typescript
-// before (mock data)
-import { mockBlogPosts } from "@/data/mock";
-
-// after (sanity cms)
-import { sanityClient } from "@/lib/sanity/client";
-import { allBlogPostsQuery } from "@/lib/sanity/queries";
-
-const posts = await sanityClient.fetch(allBlogPostsQuery);
-```
+- `/admin`
+- `/api/*`
 
 ---
 
@@ -213,15 +197,15 @@ const posts = await sanityClient.fetch(allBlogPostsQuery);
 
 ```bash
 # install vercel cli
-npm i -g vercel
+pnpm add -g vercel
 
 # deploy
 vercel
 ```
 
 set environment variables in vercel dashboard:
-- `NEXT_PUBLIC_SANITY_PROJECT_ID`
-- `NEXT_PUBLIC_SANITY_DATASET`
+- `PAYLOAD_SECRET`
+- `DATABASE_URL`
 
 ### other platforms
 
@@ -229,7 +213,7 @@ works with any platform supporting next.js:
 - netlify
 - railway
 - aws amplify
-- self-hosted with `npm run build && npm start`
+- self-hosted with `pnpm build && pnpm start`
 
 ---
 

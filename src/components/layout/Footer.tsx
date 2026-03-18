@@ -11,10 +11,10 @@ const footerLinks = [
 ];
 
 const socialLinks = [
-  { href: "https://twitter.com", label: "Twitter" },
-  { href: "https://instagram.com", label: "Instagram" },
-  { href: "https://linkedin.com", label: "Linkedin" },
-  { href: "https://github.com", label: "Github" },
+  { href: "https://discord.gg/zxHk5u85wN", label: "Discord" },
+  { href: "https://www.instagram.com/nyalalabs/", label: "Instagram" },
+  { href: "https://www.linkedin.com/company/nyalalabs", label: "Linkedin" },
+  { href: "https://github.com/Nyala-Labs", label: "Github" },
 ];
 
 export default function Footer() {
@@ -84,7 +84,7 @@ export default function Footer() {
               Want to join?
             </p>
             <a
-              href="https://forms.google.com"
+              href="https://forms.gle/f3g69MxUrquDFWQZ9"
               target="_blank"
               rel="noopener noreferrer"
               className="mt-3 inline-block w-fit border border-nyala-red px-5 py-2 font-mono text-xs uppercase tracking-widest text-nyala-red transition-all duration-300 hover:bg-nyala-red hover:text-nyala-white"
@@ -98,9 +98,6 @@ export default function Footer() {
         <div className="mt-16 flex flex-col items-center justify-between gap-4 border-t border-nyala-gray-light pt-6 md:flex-row">
           <p className="font-mono text-[10px] text-nyala-gray-muted">
             © {new Date().getFullYear()} Nyala. All rights reserved.
-          </p>
-          <p className="font-mono text-[10px] text-nyala-gray-muted">
-            Built with Next.js · Styled with Tailwind · Powered by Community
           </p>
         </div>
       </div>

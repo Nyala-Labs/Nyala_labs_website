@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { motion } from "framer-motion";
 import type { BlogPost } from "@/types";
 import { formatDate } from "@/lib/utils";
@@ -13,6 +14,7 @@ interface BlogCardProps {
 export default function BlogCard({ post, index = 0, featured = false }: BlogCardProps) {
   if (featured) {
     return (
+      <Link href={`/blogs/${post.slug}`}>
       <motion.article
         initial={{ opacity: 0, y: 40 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -64,10 +66,12 @@ export default function BlogCard({ post, index = 0, featured = false }: BlogCard
           </div>
         </div>
       </motion.article>
+      </Link>
     );
   }
 
   return (
+    <Link href={`/blogs/${post.slug}`}>
     <motion.article
       initial={{ opacity: 0, y: 30 }}
       whileInView={{ opacity: 1, y: 0 }}
@@ -113,5 +117,6 @@ export default function BlogCard({ post, index = 0, featured = false }: BlogCard
         </div>
       </div>
     </motion.article>
+    </Link>
   );
 }

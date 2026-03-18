@@ -14,7 +14,7 @@
   },
   "dependencies": {
     "@emailjs/browser": "^3.3.0",
-    "@payloadcms/db-sqlite": "^3.66.2",
+    "@payloadcms/db-postgres": "^3.79.0",
     "@payloadcms/live-preview-react": "^3.79.0",
     "@payloadcms/next": "^3.66.2",
     "@payloadcms/richtext-lexical": "^3.66.2",

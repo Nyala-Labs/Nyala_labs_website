@@ -1,0 +1,9 @@
+# pnpm 10+: dependency install scripts only run for packages listed here (supply-chain default).
+packages:
+  - "."
+
+onlyBuiltDependencies:
+  - sharp
+  - esbuild
+  - es5-ext
+  - unrs-resolver

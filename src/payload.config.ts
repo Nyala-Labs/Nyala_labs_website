@@ -1,5 +1,6 @@
 import path from "path";
 import { fileURLToPath } from "url";
+import sharp from "sharp";
 import { buildConfig } from "payload";
 import { postgresAdapter } from "@payloadcms/db-postgres";
 import { lexicalEditor } from "@payloadcms/richtext-lexical";
@@ -17,6 +18,7 @@ const filename = fileURLToPath(import.meta.url);
 const dirname = path.dirname(filename);
 
 export default buildConfig({
+  sharp,
   secret: process.env.PAYLOAD_SECRET || "dev-payload-secret-change-me",
   editor: lexicalEditor(),
   collections: [Users, BlogPosts, CommitteeMembers, Activities, News, Media],

@@ -24,7 +24,16 @@ export default buildConfig({
   plugins: [
     s3Storage({
       collections: {
-        media: true,
+        // R2 S3 API URL is private; public reads use r2.dev or a custom domain (NEXT_PUBLIC_R2_PUBLIC_URL).
+        media: {
+          generateFileURL: ({ filename, prefix }) => {
+            const base = (process.env.NEXT_PUBLIC_R2_PUBLIC_URL || "").replace(/\/$/, "");
+            if (!base) {
+              return `${process.env.CLOUDFLARE_R2_ACCOUNT_ID ? `https://${process.env.CLOUDFLARE_R2_ACCOUNT_ID}.r2.cloudflarestorage.com` : ""}/${process.env.CLOUDFLARE_R2_BUCKET || "bucket"}/${path.posix.join(prefix || "", filename)}`;
+            }
+            return `${base}/${path.posix.join(prefix || "", filename)}`;
+          },
+        },
       },
       bucket: process.env.CLOUDFLARE_R2_BUCKET || "",
       config: {

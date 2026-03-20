@@ -17,8 +17,18 @@ import { Homepage } from "./globals/Homepage";
 const filename = fileURLToPath(import.meta.url);
 const dirname = path.dirname(filename);
 
+/** Canonical site URL — required in production for admin CSRF, metadataBase, and API client config */
+const serverURL = (() => {
+  const fromEnv =
+    process.env.NEXT_PUBLIC_SERVER_URL || process.env.PAYLOAD_PUBLIC_SERVER_URL;
+  if (fromEnv) return fromEnv.replace(/\/$/, "");
+  if (process.env.VERCEL_URL) return `https://${process.env.VERCEL_URL}`;
+  return "http://localhost:3000";
+})();
+
 export default buildConfig({
   sharp,
+  serverURL,
   secret: process.env.PAYLOAD_SECRET || "dev-payload-secret-change-me",
   editor: lexicalEditor(),
   collections: [Users, BlogPosts, CommitteeMembers, Activities, News, Media],
@@ -61,7 +71,7 @@ export default buildConfig({
     },
     livePreview: {
       url: ({ data }) => {
-        const base = process.env.NEXT_PUBLIC_SERVER_URL || "http://localhost:3000";
+        const base = serverURL;
         if (data?.slug) {
           return `${base}/blogs/${data.slug}`;
         }

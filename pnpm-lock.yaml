@@ -18,10 +18,10 @@ importers:
         specifier: ^3.79.0
         version: 3.79.0(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
       '@payloadcms/next':
-        specifier: ^3.66.2
+        specifier: 3.79.0
         version: 3.79.0(@types/react@19.2.14)(graphql@16.13.1)(monaco-editor@0.55.1)(next@15.4.11(react-dom@19.2.4(react@19.2.4))(react@19.2.4)(sass@1.77.4))(payload@3.79.0(graphql@16.13.1)(typescript@5.9.3))(react-dom@19.2.4(react@19.2.4))(react@19.2.4)(typescript@5.9.3)
       '@payloadcms/richtext-lexical':
-        specifier: ^3.66.2
+        specifier: 3.79.0
         version: 3.79.0(@faceless-ui/modal@3.0.0(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(@faceless-ui/scroll-info@2.0.0(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(@payloadcms/next@3.79.0(@types/react@19.2.14)(graphql@16.13.1)(monaco-editor@0.55.1)(next@15.4.11(react-dom@19.2.4(react@19.2.4))(react@19.2.4)(sass@1.77.4))(payload@3.79.0(graphql@16.13.1)(typescript@5.9.3))(react-dom@19.2.4(react@19.2.4))(react@19.2.4)(typescript@5.9.3))(@types/react@19.2.14)(monaco-editor@0.55.1)(next@15.4.11(react-dom@19.2.4(react@19.2.4))(react@19.2.4)(sass@1.77.4))(payload@3.79.0(graphql@16.13.1)(typescript@5.9.3))(react-dom@19.2.4(react@19.2.4))(react@19.2.4)(typescript@5.9.3)(yjs@13.6.30)
       '@payloadcms/storage-s3':
         specifier: 3.79.0
@@ -39,7 +39,7 @@ importers:
         specifier: 15.4.11
         version: 15.4.11(react-dom@19.2.4(react@19.2.4))(react@19.2.4)(sass@1.77.4)
       payload:
-        specifier: ^3.66.2
+        specifier: 3.79.0
         version: 3.79.0(graphql@16.13.1)(typescript@5.9.3)
       react:
         specifier: ^19.0.0

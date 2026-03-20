@@ -3,6 +3,7 @@ import { fileURLToPath } from "url";
 import { buildConfig } from "payload";
 import { postgresAdapter } from "@payloadcms/db-postgres";
 import { lexicalEditor } from "@payloadcms/richtext-lexical";
+import { s3Storage } from "@payloadcms/storage-s3";
 
 import { BlogPosts } from "./collections/BlogPosts";
 import { CommitteeMembers } from "./collections/CommitteeMembers";
@@ -20,6 +21,23 @@ export default buildConfig({
   editor: lexicalEditor(),
   collections: [Users, BlogPosts, CommitteeMembers, Activities, News, Media],
   globals: [Homepage],
+  plugins: [
+    s3Storage({
+      collections: {
+        media: true,
+      },
+      bucket: process.env.CLOUDFLARE_R2_BUCKET || "",
+      config: {
+        endpoint: `https://${process.env.CLOUDFLARE_R2_ACCOUNT_ID}.r2.cloudflarestorage.com`,
+        credentials: {
+          accessKeyId: process.env.CLOUDFLARE_R2_ACCESS_KEY_ID || "",
+          secretAccessKey: process.env.CLOUDFLARE_R2_SECRET_ACCESS_KEY || "",
+        },
+        region: "auto",
+        forcePathStyle: true,
+      },
+    }),
+  ],
   db: postgresAdapter({
     pool: {
       connectionString: process.env.DATABASE_URL,

@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import type { ReactNode } from "react";
 
 import Navbar from "@/components/layout/Navbar";
@@ -12,9 +13,15 @@ type SiteShellProps = {
 };
 
 export default function SiteShell({ children }: SiteShellProps) {
+  const [isDesktop, setIsDesktop] = useState(false);
+
+  useEffect(() => {
+    setIsDesktop(window.matchMedia("(min-width: 768px)").matches);
+  }, []);
+
   return (
     <>
-      <SplashCursor />
+      {isDesktop && <SplashCursor />}
       <GrainOverlay />
       <Navbar />
       <main className="min-h-screen">{children}</main>

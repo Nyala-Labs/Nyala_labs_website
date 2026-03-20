@@ -13,19 +13,26 @@ const fallbackHeroMedia: HeroMediaItem[] = [
   { type: "image", src: "/images/hero-3.jpg", alt: "Nyala Community Event" },
 ];
 
-export default function HeroVideoSection() {
-  const [heroMedia, setHeroMedia] = useState<HeroMediaItem[]>(fallbackHeroMedia);
+interface HeroVideoSectionProps {
+  initialHeroMedia?: HeroMediaItem[];
+}
+
+export default function HeroVideoSection({ initialHeroMedia }: HeroVideoSectionProps = {}) {
+  const [heroMedia, setHeroMedia] = useState<HeroMediaItem[]>(
+    initialHeroMedia?.length ? initialHeroMedia : fallbackHeroMedia
+  );
   const [currentMediaIndex, setCurrentMediaIndex] = useState(0);
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
   const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    if (initialHeroMedia?.length) return;
     fetchHomepage().then((data) => {
       if (data.heroMedia.length > 0) {
         setHeroMedia(data.heroMedia);
       }
     });
-  }, []);
+  }, [initialHeroMedia]);
 
   // rotate media independently from taglines
   useEffect(() => {

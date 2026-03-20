@@ -1,0 +1,226 @@
+"use client";
+
+import { motion } from "framer-motion";
+import HeroVideoSection from "@/components/hero/HeroVideoSection";
+import BlogCard from "@/components/blog/BlogCard";
+import SectionHeading from "@/components/ui/SectionHeading";
+import AnimatedDivider from "@/components/ui/AnimatedDivider";
+import ScrollReveal from "@/components/ui/ScrollReveal";
+import { formatDate } from "@/lib/utils";
+import { staggerContainer, fadeUp } from "@/lib/animations";
+import type { Activity, BlogPost, HeroMediaItem, HighlightItem } from "@/types";
+
+const defaultHighlightCaptions = [
+  "hackathon night",
+  "team workshop",
+  "community meetup",
+  "tech summit",
+];
+
+interface HomePageClientProps {
+  latestPosts: BlogPost[];
+  upcomingActivities: Activity[];
+  highlights: HighlightItem[];
+  heroMedia: HeroMediaItem[];
+}
+
+export default function HomePageClient({
+  latestPosts,
+  upcomingActivities,
+  highlights,
+  heroMedia,
+}: HomePageClientProps) {
+  return (
+    <>
+      {/* ─── hero ────────────────────────────────── */}
+      <HeroVideoSection initialHeroMedia={heroMedia} />
+
+      {/* ─── upcoming activities ─────────────────── */}
+      <section className="relative bg-nyala-black py-24">
+        <div className="mx-auto max-w-7xl px-6">
+          <SectionHeading
+            title="Upcoming Activities"
+            subtitle="What's next on the trail"
+            glow
+          />
+
+          {upcomingActivities.length > 0 ? (
+            <motion.div
+              variants={staggerContainer}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, margin: "-50px" }}
+              className="grid gap-6 md:grid-cols-3"
+            >
+              {upcomingActivities.map((activity, i) => (
+                <motion.div
+                  key={activity._id}
+                  variants={fadeUp}
+                  custom={i}
+                  className="group relative overflow-hidden border border-nyala-gray-light bg-nyala-gray p-6 transition-all duration-500 hover:-translate-y-2 hover:border-nyala-red/50 hover:shadow-[0_0_30px_rgba(198,40,40,0.1)]"
+                >
+                  <div className="pointer-events-none absolute inset-x-0 bottom-0 h-1 w-[200%] bg-gradient-to-r from-nyala-red via-nyala-yellow to-nyala-red opacity-0 transition-opacity duration-500 group-hover:animate-shimmer group-hover:opacity-100" />
+
+                  <div className="relative z-10 mb-4 flex items-center gap-3">
+                    <span className="inline-block h-2 w-2 animate-pulse rounded-full bg-nyala-red" />
+                    <span className="font-mono text-[10px] uppercase tracking-widest text-nyala-red">
+                      {activity.status}
+                    </span>
+                  </div>
+                  <h3 className="font-mono text-lg font-semibold text-nyala-white">
+                    {activity.title}
+                  </h3>
+                  <p className="mt-2 font-mono text-xs leading-relaxed text-nyala-gray-muted">
+                    {activity.description}
+                  </p>
+                  <div className="mt-4 space-y-1 font-mono text-[10px] text-nyala-gray-muted">
+                    <div className="flex items-center gap-2">
+                      <span className="text-nyala-yellow">📅</span>
+                      <span>{formatDate(activity.date)}</span>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <span className="text-nyala-yellow">📍</span>
+                      <span>{activity.location}</span>
+                    </div>
+                  </div>
+                </motion.div>
+              ))}
+            </motion.div>
+          ) : (
+            <p className="font-mono text-xs text-nyala-gray-muted">
+              No upcoming activities published yet.
+            </p>
+          )}
+        </div>
+      </section>
+
+      <AnimatedDivider />
+
+      {/* ─── latest blogs ────────────────────────── */}
+      <section className="bg-nyala-black py-24">
+        <div className="mx-auto max-w-7xl px-6">
+          <div className="mb-12 flex items-end justify-between">
+            <SectionHeading
+              title="latest from the trail"
+              subtitle="stories, guides, and insights from the community"
+              className="mb-0"
+            />
+            <ScrollReveal delay={0.3}>
+              <a
+                href="/blogs"
+                className="hidden font-mono text-xs uppercase tracking-widest text-nyala-gray-muted transition-colors hover:text-nyala-red md:block"
+              >
+                View All →
+              </a>
+            </ScrollReveal>
+          </div>
+
+          {latestPosts.length > 0 ? (
+            <div className="grid gap-6 md:grid-cols-3">
+              {latestPosts.map((post, i) => (
+                <BlogCard key={post._id} post={post} index={i} />
+              ))}
+            </div>
+          ) : (
+            <p className="font-mono text-xs text-nyala-gray-muted">
+              No blog posts published yet.
+            </p>
+          )}
+
+          <div className="mt-8 text-center md:hidden">
+            <a
+              href="/blogs"
+              className="font-mono text-xs uppercase tracking-widest text-nyala-gray-muted transition-colors hover:text-nyala-red"
+            >
+              View all posts →
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <AnimatedDivider />
+
+      {/* ─── highlight moments ───────────────────── */}
+      <section className="bg-nyala-black py-24">
+        <div className="mx-auto max-w-7xl px-6">
+          <SectionHeading
+            title="highlight moments"
+            subtitle="snapshots from our journey"
+            align="center"
+          />
+
+          <motion.div
+            variants={staggerContainer}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            className="grid grid-cols-2 gap-3 md:grid-cols-4"
+          >
+            {highlights.slice(0, 4).map((item, n) => (
+              <motion.div
+                key={n}
+                variants={fadeUp}
+                custom={n}
+                className="group relative aspect-square overflow-hidden border border-nyala-gray-light bg-nyala-gray transition-all duration-500 hover:-translate-y-2 hover:border-nyala-white/20 hover:shadow-[0_20px_40px_-15px_rgba(0,0,0,0.7)]"
+              >
+                <div
+                  className="h-full w-full bg-cover bg-center transition-transform duration-700 group-hover:scale-110"
+                  style={{
+                    backgroundImage: item.image ? `url(${item.image})` : undefined,
+                    filter: "brightness(0.6)",
+                  }}
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-nyala-black/80 via-transparent to-transparent" />
+                <div className="absolute inset-0 flex items-end p-4">
+                  <span className="font-mono text-xs text-nyala-white opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+                    {item.caption || defaultHighlightCaptions[n] || ""}
+                  </span>
+                </div>
+              </motion.div>
+            ))}
+          </motion.div>
+        </div>
+      </section>
+
+      {/* ─── cta ─────────────────────────────────── */}
+      <section className="relative overflow-hidden bg-nyala-gray py-24">
+        <div className="pointer-events-none absolute inset-0">
+          <div className="absolute left-1/4 top-1/2 h-64 w-64 -translate-x-1/2 -translate-y-1/2 rounded-full bg-nyala-red/5 blur-[100px]" />
+          <div className="absolute right-1/4 top-1/2 h-64 w-64 -translate-x-1/2 -translate-y-1/2 rounded-full bg-nyala-yellow/5 blur-[100px]" />
+        </div>
+
+        <div className="relative mx-auto max-w-3xl px-6 text-center">
+          <ScrollReveal>
+            <h2 className="glow-text font-mono text-3xl font-bold tracking-tight text-nyala-yellow md:text-4xl">
+              Ready to blaze the trail?
+            </h2>
+          </ScrollReveal>
+          <ScrollReveal delay={0.2}>
+            <p className="mx-auto mt-4 max-w-md font-mono text-sm text-nyala-gray-muted">
+              Join a community of builders who ship real projects, not just
+              tutorials. Your journey starts here.
+            </p>
+          </ScrollReveal>
+          <ScrollReveal delay={0.4}>
+            <div className="mt-8 flex flex-col items-center gap-4 sm:flex-row sm:justify-center">
+              <a
+                href="https://forms.gle/f3g69MxUrquDFWQZ9"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="border border-nyala-red bg-nyala-red px-8 py-3 font-mono text-xs uppercase tracking-[0.2em] text-nyala-white transition-all duration-300 hover:bg-nyala-red-dark hover:shadow-lg hover:shadow-nyala-red/20"
+              >
+                Join Nyala →
+              </a>
+              <a
+                href="/about"
+                className="border border-nyala-gray-light px-8 py-3 font-mono text-xs uppercase tracking-[0.2em] text-nyala-gray-muted transition-all duration-300 hover:border-nyala-yellow hover:text-nyala-yellow"
+              >
+                Our Story
+              </a>
+            </div>
+          </ScrollReveal>
+        </div>
+      </section>
+    </>
+  );
+}

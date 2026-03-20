@@ -6,6 +6,22 @@ import type {
   HighlightItem,
 } from "@/types";
 
+const TIMEOUTS = {
+  critical: 5_000,
+  secondary: 8_000,
+  background: 10_000,
+} as const;
+
+const fetchWithTimeout = async (url: string, timeoutMs: number): Promise<Response> => {
+  const controller = new AbortController();
+  const id = setTimeout(() => controller.abort(), timeoutMs);
+  try {
+    return await fetch(url, { signal: controller.signal });
+  } finally {
+    clearTimeout(id);
+  }
+};
+
 type PayloadMedia = {
   url?: string;
 };
@@ -44,7 +60,12 @@ export type HomepageData = {
 };
 
 export const fetchHomepage = async (): Promise<HomepageData> => {
-  const response = await fetch("/api/globals/homepage?depth=1");
+  let response: Response;
+  try {
+    response = await fetchWithTimeout("/api/globals/homepage?depth=1", TIMEOUTS.critical);
+  } catch {
+    return { heroMedia: [], highlights: [] };
+  }
   if (!response.ok) {
     return { heroMedia: [], highlights: [] };
   }
@@ -81,10 +102,16 @@ export const fetchHomepage = async (): Promise<HomepageData> => {
 
 export const fetchPayloadCollection = async <T extends PayloadDoc>(
   collection: string,
-  searchParams = ""
+  searchParams = "",
+  timeout: number = TIMEOUTS.secondary
 ): Promise<T[]> => {
   const query = searchParams ? `?${searchParams}` : "";
-  const response = await fetch(`/api/${collection}${query}`);
+  let response: Response;
+  try {
+    response = await fetchWithTimeout(`/api/${collection}${query}`, timeout);
+  } catch {
+    return [];
+  }
   if (!response.ok) return [];
 
   const data = (await response.json()) as PayloadListResponse<T>;

@@ -2,6 +2,8 @@ import { getServerCollection } from "@/lib/payload";
 import { mapPayloadCommitteeMember } from "@/lib/cms-client";
 import AboutPageClient from "./AboutPageClient";
 
+export const revalidate = 60;
+
 export default async function AboutPage() {
   const docs = await getServerCollection("committee-members", {
     sort: "order",

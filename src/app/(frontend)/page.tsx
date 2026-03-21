@@ -3,6 +3,8 @@ import { mapPayloadBlogPost, mapPayloadActivity } from "@/lib/cms-client";
 import HomePageClient from "./HomePageClient";
 import type { HighlightItem } from "@/types";
 
+export const revalidate = 60;
+
 const defaultHighlightCaptions = [
   "hackathon night",
   "team workshop",

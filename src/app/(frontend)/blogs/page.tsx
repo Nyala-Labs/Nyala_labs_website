@@ -2,6 +2,8 @@ import { getServerCollection } from "@/lib/payload";
 import { mapPayloadBlogPost } from "@/lib/cms-client";
 import BlogsPageClient from "./BlogsPageClient";
 
+export const revalidate = 60;
+
 export default async function BlogsPage() {
   const docs = await getServerCollection("blog-posts", {
     sort: "-publishedAt",

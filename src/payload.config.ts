@@ -29,6 +29,16 @@ const serverURL = (() => {
 export default buildConfig({
   sharp,
   serverURL,
+  csrf: [
+    serverURL,
+    "https://nyalalabs.org",
+    process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : "",
+  ].filter(Boolean),
+  cors: [
+    serverURL,
+    "https://nyalalabs.org",
+    process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : "",
+  ].filter(Boolean),
   secret: process.env.PAYLOAD_SECRET || "dev-payload-secret-change-me",
   editor: lexicalEditor(),
   collections: [Users, BlogPosts, CommitteeMembers, Activities, News, Media],

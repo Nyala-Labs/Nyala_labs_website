@@ -16,17 +16,17 @@ const pixelify = Pixelify_Sans({
 });
 
 export const metadata: Metadata = {
-  title: "Nyala — Blaze the Trail",
+  title: "Nyala Labs — Blaze the Trail",
   description:
-    "A university club for builders, creators, and innovators who refuse to stay in the tutorial loop.",
+    "A Malaysia-based youth club for builders, creators, and innovators who are passionate about technology and innovation especially in the field of AI. We are a vibrant comminuty wish to learn and grow together.",
   icons: {
     icon: "/favicon/nyalalabslogo.svg",
     shortcut: "/favicon/nyalalabslogo.svg",
   },
   openGraph: {
-    title: "Nyala — Blaze the Trail",
+    title: "Nyala Labs — Blaze the Trail",
     description:
-      "A university club for builders, creators, and innovators who refuse to stay in the tutorial loop.",
+      "A Malaysia-based youth club for builders, creators, and innovators who are passionate about technology and innovation especially in the field of AI. We are a vibrant comminuty wish to learn and grow together.",
     type: "website",
   },
 };

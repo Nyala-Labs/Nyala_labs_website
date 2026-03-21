@@ -33,8 +33,9 @@ export default function Footer() {
               <span className="text-nyala-white">ala</span>
             </motion.h3>
             <p className="mt-3 font-mono text-xs leading-relaxed text-nyala-gray-muted">
-              Blaze the trail. A youth-led club for builders, creators, and
-              innovators who are passionate about technology and innovation especially in the field of AI.
+              Nyala Labs is a Malaysia-based youth club for builders, creators, and
+              innovators who are passionate about technology and innovation especially in the field of AI. 
+              We are a vibrant comminuty wish to learn and grow together.
             </p>
           </div>
 

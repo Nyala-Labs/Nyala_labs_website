@@ -171,7 +171,56 @@ PAYLOAD_SECRET=replace-with-a-secure-random-string
 DATABASE_URL=file:./payload.db
 ```
 
-### 3. collections
+### 3. access control
+
+access is managed in `src/collections/access.ts` and applied to every collection and global.
+
+#### roles
+
+| role | assigned to |
+|------|-------------|
+| `admin` | full access — manage users, all content |
+| `editor` | content access — manage all content, no user management |
+
+#### permission matrix
+
+| action | public | editor | admin |
+|--------|--------|--------|-------|
+| read all content (public site) | ✅ | ✅ | ✅ |
+| access `/admin` panel | ❌ | ✅ | ✅ |
+| create / edit / delete content | ❌ | ✅ | ✅ |
+| create new users | ❌ | ❌ | ✅ |
+| delete users | ❌ | ❌ | ✅ |
+| edit own profile | — | ✅ | ✅ |
+
+#### how it works
+
+the shared helper in `src/collections/access.ts`:
+
+```ts
+export const isAdminOrEditor: Access = ({ req: { user } }) =>
+  Boolean(user?.roles?.includes("admin") || user?.roles?.includes("editor"));
+```
+
+this is applied as `create`, `update`, and `delete` on every collection:
+- `BlogPosts`, `Media`, `CommitteeMembers`, `Activities`, `News`
+- `Homepage` global (`update` only)
+
+the `Users` collection keeps stricter rules — only `admin` can create or delete users.
+
+#### creating the first admin account
+
+on first deploy, payload allows creating an initial admin account via `/admin` with no existing users.
+after that, only existing admins can create new users via the admin panel → **Users** collection.
+
+to manually grant admin role via sql (neon sql editor):
+```sql
+UPDATE users SET roles = '["admin","editor"]' WHERE email = 'your@email.com';
+```
+
+---
+
+### 4. collections
 
 content types are configured in `src/collections/`:
 

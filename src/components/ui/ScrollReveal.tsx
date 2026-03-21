@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import type { ReactNode } from "react";
 
@@ -13,10 +14,17 @@ interface ScrollRevealProps {
 }
 
 const directionMap = {
-  up: { y: 50, x: 0 },
-  down: { y: -50, x: 0 },
-  left: { x: -50, y: 0 },
+  up:    { y: 50, x: 0 },
+  down:  { y: -50, x: 0 },
+  left:  { x: -50, y: 0 },
   right: { x: 50, y: 0 },
+};
+
+const cssClassMap: Record<string, string> = {
+  up:    "reveal-up",
+  down:  "reveal-up",
+  left:  "reveal-left",
+  right: "reveal-right",
 };
 
 export default function ScrollReveal({
@@ -27,21 +35,40 @@ export default function ScrollReveal({
   className = "",
   once = true,
 }: ScrollRevealProps) {
-  const offset = directionMap[direction];
+  const [isDesktop, setIsDesktop] = useState(false);
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setIsDesktop(window.matchMedia("(min-width: 768px)").matches);
+    setMounted(true);
+  }, []);
+
+  if (!mounted) {
+    // SSR/pre-mount: render invisible placeholder to avoid layout shift
+    return <div className={className} style={{ opacity: 0 }}>{children}</div>;
+  }
+
+  if (isDesktop) {
+    const offset = directionMap[direction];
+    return (
+      <motion.div
+        initial={{ opacity: 0, ...offset }}
+        whileInView={{ opacity: 1, x: 0, y: 0 }}
+        viewport={{ once, margin: "-50px" }}
+        transition={{ duration, delay, ease: [0.25, 0.46, 0.45, 0.94] }}
+        className={className}
+      >
+        {children}
+      </motion.div>
+    );
+  }
 
   return (
-    <motion.div
-      initial={{ opacity: 0, ...offset }}
-      whileInView={{ opacity: 1, x: 0, y: 0 }}
-      viewport={{ once, margin: "-50px" }}
-      transition={{
-        duration,
-        delay,
-        ease: [0.25, 0.46, 0.45, 0.94],
-      }}
-      className={className}
+    <div
+      className={`${cssClassMap[direction]} ${className}`}
+      style={{ animationDelay: delay ? `${delay}s` : undefined, animationDuration: `${duration}s` }}
     >
       {children}
-    </motion.div>
+    </div>
   );
 }

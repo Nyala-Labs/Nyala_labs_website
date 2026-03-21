@@ -22,8 +22,14 @@ export default function HeroVideoSection({ initialHeroMedia }: HeroVideoSectionP
     initialHeroMedia?.length ? initialHeroMedia : fallbackHeroMedia
   );
   const [currentMediaIndex, setCurrentMediaIndex] = useState(0);
-  const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
+  const [isDesktop, setIsDesktop] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
+  const parallaxRef = useRef<HTMLDivElement>(null);
+  const rafId = useRef<number>(0);
+
+  useEffect(() => {
+    setIsDesktop(window.matchMedia("(min-width: 768px)").matches);
+  }, []);
 
   useEffect(() => {
     if (initialHeroMedia?.length) return;
@@ -34,9 +40,8 @@ export default function HeroVideoSection({ initialHeroMedia }: HeroVideoSectionP
     });
   }, [initialHeroMedia]);
 
-  // rotate media independently from taglines
   useEffect(() => {
-    if (heroMedia.length === 0) return;
+    if (heroMedia.length <= 1) return;
     const interval = setInterval(() => {
       setCurrentMediaIndex((prev) => (prev + 1) % heroMedia.length);
     }, 6000);
@@ -45,64 +50,71 @@ export default function HeroVideoSection({ initialHeroMedia }: HeroVideoSectionP
 
   const handleMouseMove = useCallback(
     (e: React.MouseEvent<HTMLDivElement>) => {
-      if (!containerRef.current) return;
-      const rect = containerRef.current.getBoundingClientRect();
-      const x = ((e.clientX - rect.left) / rect.width - 0.5) * 20;
-      const y = ((e.clientY - rect.top) / rect.height - 0.5) * 20;
-      setMousePos({ x, y });
+      if (!containerRef.current || !parallaxRef.current) return;
+      cancelAnimationFrame(rafId.current);
+      rafId.current = requestAnimationFrame(() => {
+        const rect = containerRef.current!.getBoundingClientRect();
+        const x = ((e.clientX - rect.left) / rect.width - 0.5) * 10;
+        const y = ((e.clientY - rect.top) / rect.height - 0.5) * 10;
+        parallaxRef.current!.style.transform = `translate(${x}px, ${y}px)`;
+      });
     },
     []
   );
 
+  const firstImage = heroMedia.find((m) => m.type === "image");
+
   return (
     <section
       ref={containerRef}
-      onMouseMove={handleMouseMove}
+      onMouseMove={isDesktop ? handleMouseMove : undefined}
       className="relative flex h-screen w-full items-center justify-center overflow-hidden"
     >
-      {/* background media with parallax */}
-      <AnimatePresence mode="wait">
-        <motion.div
-          key={currentMediaIndex}
-          initial={{ opacity: 0, scale: 1.1 }}
-          animate={{
-            opacity: 1,
-            scale: 1,
-            x: mousePos.x * 0.5,
-            y: mousePos.y * 0.5,
+      {isDesktop ? (
+        <div ref={parallaxRef} className="absolute inset-0 -m-4 will-change-transform">
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={currentMediaIndex}
+              initial={{ opacity: 0, scale: 1.1 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.95 }}
+              transition={{ opacity: { duration: 1.5 }, scale: { duration: 1.5 } }}
+              className="absolute inset-0"
+            >
+              {heroMedia[currentMediaIndex]?.type === "image" ? (
+                <div
+                  className="h-full w-full bg-cover bg-center"
+                  style={{
+                    backgroundImage: `url(${heroMedia[currentMediaIndex]?.src})`,
+                    filter: "brightness(0.3) contrast(1.1) saturate(0.8)",
+                  }}
+                />
+              ) : (
+                <video
+                  src={heroMedia[currentMediaIndex]?.src}
+                  autoPlay
+                  muted
+                  loop
+                  playsInline
+                  preload="none"
+                  className="h-full w-full object-cover"
+                  style={{
+                    filter: "brightness(0.3) contrast(1.1) saturate(0.8)",
+                  }}
+                />
+              )}
+            </motion.div>
+          </AnimatePresence>
+        </div>
+      ) : (
+        <div
+          className="absolute inset-0 bg-cover bg-center"
+          style={{
+            backgroundImage: firstImage ? `url(${firstImage.src})` : undefined,
+            filter: "brightness(0.3) contrast(1.1) saturate(0.8)",
           }}
-          exit={{ opacity: 0, scale: 0.95 }}
-          transition={{
-            opacity: { duration: 1.5 },
-            scale: { duration: 1.5 },
-            x: { duration: 0.3, ease: "linear" },
-            y: { duration: 0.3, ease: "linear" },
-          }}
-          className="absolute inset-0 -m-4"
-        >
-          {heroMedia[currentMediaIndex]?.type === "image" ? (
-            <div
-              className="h-full w-full bg-cover bg-center"
-              style={{
-                backgroundImage: `url(${heroMedia[currentMediaIndex]?.src})`,
-                filter: "brightness(0.3) contrast(1.1) saturate(0.8)",
-              }}
-            />
-          ) : (
-            <video
-              src={heroMedia[currentMediaIndex]?.src}
-              autoPlay
-              muted
-              loop
-              playsInline
-              className="h-full w-full object-cover"
-              style={{
-                filter: "brightness(0.3) contrast(1.1) saturate(0.8)",
-              }}
-            />
-          )}
-        </motion.div>
-      </AnimatePresence>
+        />
+      )}
 
       {/* gradient overlays */}
       <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-nyala-black/60 via-transparent to-nyala-black" />

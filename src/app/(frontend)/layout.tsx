@@ -18,7 +18,7 @@ const pixelify = Pixelify_Sans({
 export const metadata: Metadata = {
   title: "Nyala Labs — Blaze the Trail",
   description:
-    "A Malaysia-based youth club for builders, creators, and innovators who are passionate about technology and innovation especially in the field of AI. We are a vibrant comminuty wish to learn and grow together.",
+    "A Malaysia-based youth community for builders, creators, and innovators who are passionate about technology and innovation especially in the field of AI. We are a vibrant comminuty wish to learn and grow together.",
   icons: {
     icon: "/favicon/nyalalabslogo.svg",
     shortcut: "/favicon/nyalalabslogo.svg",
@@ -26,8 +26,23 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Nyala Labs — Blaze the Trail",
     description:
-      "A Malaysia-based youth club for builders, creators, and innovators who are passionate about technology and innovation especially in the field of AI. We are a vibrant comminuty wish to learn and grow together.",
+      "A Malaysia-based youth community for builders, creators, and innovators who are passionate about technology and innovation especially in the field of AI. We are a vibrant comminuty wish to learn and grow together.",
     type: "website",
+    images: [
+      {
+        url: "/og-image.jpg",
+        width: 1200,
+        height: 630,
+        alt: "Nyala Labs — Blaze the Trail",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Nyala Labs — Blaze the Trail",
+    description:
+      "A Malaysia-based youth community for builders, creators, and innovators who are passionate about technology and innovation especially in the field of AI.",
+    images: ["/og-image.jpg"],
   },
 };
 

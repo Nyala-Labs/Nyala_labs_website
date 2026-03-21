@@ -24,8 +24,9 @@ export const Users: CollectionConfig = {
     },
     // Only admins can delete users
     delete: ({ req: { user } }) => Boolean(user?.roles?.includes("admin")),
-    // Allow the first-run admin setup (no existing users)
-    admin: ({ req: { user } }) => Boolean(user?.roles?.includes("admin")),
+    // Both admin and editor roles can access the admin panel
+    admin: ({ req: { user } }) =>
+      Boolean(user?.roles?.includes("admin") || user?.roles?.includes("editor")),
   },
   fields: [
     {

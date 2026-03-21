@@ -1,10 +1,12 @@
 import type { GlobalConfig } from "payload";
+import { isAdminOrEditor } from "@/collections/access";
 
 export const Homepage: GlobalConfig = {
   slug: "homepage",
   label: "Homepage",
   access: {
     read: () => true,
+    update: isAdminOrEditor,
   },
   fields: [
     {

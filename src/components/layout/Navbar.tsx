@@ -42,7 +42,7 @@ export default function Navbar() {
             >
               <span className="text-nyala-red">n</span>
               <span className="text-nyala-yellow">y</span>
-              <span>ala</span>
+              <span>ala labs</span>
             </motion.span>
             <motion.span
               className="inline-block h-2 w-2 rounded-full bg-nyala-red"

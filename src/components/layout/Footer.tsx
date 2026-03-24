@@ -30,10 +30,10 @@ export default function Footer() {
             >
               <span className="text-nyala-red">n</span>
               <span className="text-nyala-yellow">y</span>
-              <span className="text-nyala-white">ala</span>
+              <span className="text-nyala-white">ala labs</span>
             </motion.h3>
             <p className="mt-3 font-mono text-xs leading-relaxed text-nyala-gray-muted">
-              Nyala Labs is a Malaysia-based youth club for builders, creators, and
+              Nyala Labs is a Malaysia-based youth community for builders, creators, and
               innovators who are passionate about technology and innovation especially in the field of AI. 
               We are a vibrant comminuty wish to learn and grow together.
             </p>
@@ -98,7 +98,7 @@ export default function Footer() {
         {/* bottom */}
         <div className="mt-16 flex flex-col items-center justify-between gap-4 border-t border-nyala-gray-light pt-6 md:flex-row">
           <p className="font-mono text-[10px] text-nyala-gray-muted">
-            © {new Date().getFullYear()} Nyala. All rights reserved.
+            © {new Date().getFullYear()} Nyala Labs. All rights reserved.
           </p>
         </div>
       </div>

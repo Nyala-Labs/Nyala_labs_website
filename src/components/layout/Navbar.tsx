@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, px } from "framer-motion";
 import Link from "next/link";
 
 const navLinks = [
@@ -35,7 +35,12 @@ export default function Navbar() {
       >
         <div className="mx-auto flex max-w-7xl items-center justify-between px-6">
           {/* logo */}
-          <Link href="/" className="group flex items-center gap-2">
+          <Link href="/" className="group flex items-center gap-3">
+            <img
+              src="/images/icons/21.svg"
+              alt="brand icon"
+              className="h-12 w-12 shrink-0 opacity-90 transition-transform duration-300 group-hover:scale-110"
+            />
             <motion.span
               className="font-mono text-xl font-bold tracking-tighter text-nyala-white"
               whileHover={{ scale: 1.05 }}

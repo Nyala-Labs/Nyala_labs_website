@@ -1,5 +1,13 @@
 @import "tailwindcss";
 
+@font-face {
+  font-family: "RetroPix";
+  src: url("/fonts/retropix/retropix.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
 @theme {
   --color-nyala-red: #c62828;
   --color-nyala-red-light: #ef5350;
@@ -13,8 +21,9 @@
   --color-nyala-gray-light: #2a2a2a;
   --color-nyala-gray-muted: #6b6b6b;
 
-  --font-mono: var(--font-jetbrains), "Fira Code", "Courier New", monospace;
-  --font-pixel: var(--font-pixelify), cursive;
+  --font-retropix: "RetroPix";
+  --font-mono: var(--font-retropix), "Courier New", monospace;
+  --font-pixel: var(--font-retropix), cursive;
 
   --animate-blink: blink 1s step-end infinite;
   --animate-grain: grain 0.5s steps(1) infinite;
@@ -116,13 +125,18 @@
 /* ─── base ──────────────────────────────────────── */
 html {
   scroll-behavior: smooth;
+  font-size: 18px;
 }
 
 body {
-  font-family: var(--font-mono);
+  font-family: var(--font-retropix), var(--font-mono);
+  font-size: 1rem;
+  line-height: 1.65;
   background-color: var(--color-nyala-black);
   color: var(--color-nyala-white);
   overflow-x: hidden;
+  position: relative;
+  z-index: 0;
 }
 
 ::selection {

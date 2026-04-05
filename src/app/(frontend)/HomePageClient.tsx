@@ -1,4 +1,4 @@
-"use client";
+  "use client";
 
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
@@ -7,6 +7,7 @@ import BlogCard from "@/components/blog/BlogCard";
 import SectionHeading from "@/components/ui/SectionHeading";
 import AnimatedDivider from "@/components/ui/AnimatedDivider";
 import ScrollReveal from "@/components/ui/ScrollReveal";
+import PartnershipsSection from "@/components/partnerships/PartnershipsSection";
 import { formatDate } from "@/lib/utils";
 import { staggerContainer, fadeUp } from "@/lib/animations";
 import type { Activity, BlogPost, HeroMediaItem, HighlightItem } from "@/types";
@@ -162,6 +163,13 @@ export default function HomePageClient({
           )}
         </div>
       </section>
+
+      <AnimatedDivider />
+
+      {/* ─── partnerships ────────────────────────────── */}
+      <PartnershipsSection />
+
+      <AnimatedDivider />
 
       {/* ─── cta ─────────────────────────────────── */}
       <section className="relative overflow-hidden bg-nyala-gray py-24">

@@ -25,9 +25,14 @@ export default function Footer() {
           {/* brand */}
           <div>
             <motion.h3
-              className="font-mono text-xl font-bold tracking-tighter"
+              className="font-mono text-xl font-bold tracking-tighter "
               whileHover={{ scale: 1.02 }}
             >
+              <img
+              src="/images/icons/21.svg"
+              alt="brand icon"
+              className="h-12 w-12 shrink-0 opacity-90 transition-transform duration-300 group-hover:scale-110"
+              />
               <span className="text-nyala-red">n</span>
               <span className="text-nyala-yellow">y</span>
               <span className="text-nyala-white">ala labs</span>

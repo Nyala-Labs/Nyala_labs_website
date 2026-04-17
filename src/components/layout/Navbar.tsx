@@ -45,9 +45,8 @@ export default function Navbar() {
               className="font-mono text-xl font-bold tracking-tighter text-nyala-white"
               whileHover={{ scale: 1.05 }}
             >
-              <span className="text-nyala-red">n</span>
-              <span className="text-nyala-yellow">y</span>
-              <span>ala labs</span>
+              <span className="text-nyala-white">NYALA</span>
+              <span className="text-nyala-red">LABS</span>
             </motion.span>
             <motion.span
               className="inline-block h-2 w-2 rounded-full bg-nyala-red"

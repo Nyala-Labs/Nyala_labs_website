@@ -33,9 +33,8 @@ export default function Footer() {
               alt="brand icon"
               className="h-12 w-12 shrink-0 opacity-90 transition-transform duration-300 group-hover:scale-110"
               />
-              <span className="text-nyala-red">n</span>
-              <span className="text-nyala-yellow">y</span>
-              <span className="text-nyala-white">ala labs</span>
+              <span className="text-nyala-white">NYALA</span>
+              <span className="text-nyala-red">LABS</span>
             </motion.h3>
             <p className="mt-3 font-mono text-xs leading-relaxed text-nyala-gray-muted">
               Nyala Labs is a Malaysia-based youth community for builders, creators, and

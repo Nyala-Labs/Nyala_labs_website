@@ -9,6 +9,7 @@ import AnimatedDivider from "@/components/ui/AnimatedDivider";
 import ScrollReveal from "@/components/ui/ScrollReveal";
 import PartnershipsSection from "@/components/partnerships/PartnershipsSection";
 import { formatDate } from "@/lib/utils";
+import { getEventStatus } from "@/lib/event-utils";
 import { staggerContainer, fadeUp } from "@/lib/animations";
 import type { Activity, BlogPost, HeroMediaItem, HighlightItem } from "@/types";
 
@@ -224,7 +225,7 @@ function ActivityCard({ activity }: { activity: Activity }) {
       <div className="relative z-10 mb-4 flex items-center gap-3">
         <span className="inline-block h-2 w-2 rounded-full bg-nyala-red" />
         <span className="font-mono text-[10px] uppercase tracking-widest text-nyala-red">
-          {activity.status}
+          {getEventStatus(activity.startDate, activity.endDate)}
         </span>
       </div>
       <h3 className="font-mono text-lg font-semibold text-nyala-white">{activity.title}</h3>
@@ -232,7 +233,7 @@ function ActivityCard({ activity }: { activity: Activity }) {
       <div className="mt-4 space-y-1 font-mono text-[10px] text-nyala-gray-muted">
         <div className="flex items-center gap-2">
           <span className="text-nyala-yellow">📅</span>
-          <span>{formatDate(activity.date)}</span>
+          <span>{formatDate(activity.startDate)}</span>
         </div>
         <div className="flex items-center gap-2">
           <span className="text-nyala-yellow">📍</span>

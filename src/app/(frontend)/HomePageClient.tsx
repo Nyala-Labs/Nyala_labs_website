@@ -15,7 +15,6 @@ const defaultHighlightCaptions = [
   "hackathon night",
   "team workshop",
   "community meetup",
-  "tech summit",
 ];
 
 interface HomePageClientProps {

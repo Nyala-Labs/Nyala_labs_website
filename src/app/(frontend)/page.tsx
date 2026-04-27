@@ -9,7 +9,6 @@ const defaultHighlightCaptions = [
   "hackathon night",
   "team workshop",
   "community meetup",
-  "tech summit",
 ];
 
 export default async function HomePage() {

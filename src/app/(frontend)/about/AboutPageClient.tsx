@@ -41,7 +41,7 @@ export default function AboutPageClient({ committee }: AboutPageClientProps) {
         <ScrollReveal className="mx-auto mb-16 max-w-3xl">
           <div className="border-l-2 border-nyala-red pl-6">
             <p className="font-mono text-sm leading-relaxed text-nyala-gray-muted">
-              Nyala wasn&apos;t born in a boardroom. It was born from rejection —
+              Nyala Labs wasn&apos;t born in a boardroom. It was born from rejection —
               twice. When the university said &quot;no,&quot; we didn&apos;t stop
               building. We just built louder. This is the story of how persistence
               turned a rejected proposal into a thriving community of builders.

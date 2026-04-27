@@ -1,9 +1,16 @@
 import type { Metadata } from "next";
 import { JetBrains_Mono, Pixelify_Sans } from "next/font/google";
+import localFont from "next/font/local";
 
 import SiteShell from "@/components/layout/SiteShell";
 
 import "../globals.css";
+
+const retropix = localFont({
+  src: "../../fonts/retropix.otf",
+  variable: "--font-retropix",
+  display: "swap",
+});
 
 const jetbrains = JetBrains_Mono({
   subsets: ["latin"],
@@ -52,7 +59,7 @@ export default function FrontendLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={`${jetbrains.variable} ${pixelify.variable}`}>
+    <html lang="en" className={`${retropix.variable} ${jetbrains.variable} ${pixelify.variable}`}>
       <body className="font-mono antialiased">
         <SiteShell>{children}</SiteShell>
       </body>

@@ -18,7 +18,7 @@ export default function Navbar() {
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 50);
-    window.addEventListener("scroll", onScroll);7
+    window.addEventListener("scroll", onScroll);
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
@@ -40,8 +40,8 @@ export default function Navbar() {
               className="font-retropix text-xl tracking-tighter text-nyala-white"
               whileHover={{ scale: 1.05 }}
             >
-              <span className="text-nyala-red">nyala</span>
-              <span className="text-nyala-yellow"> labs</span>
+              <span className="text-nyala-red">Nyala</span>
+              <span className="text-nyala-yellow"> Labs</span>
             </motion.span>
             <motion.span
               className="inline-block h-2 w-2 rounded-full bg-nyala-red"

@@ -9,9 +9,9 @@ export const taglines = [
 ];
 
 export const heroMedia = [
-  { type: "image" as const, src: "/images/hero-1.jpg", alt: "Nyala Team Hackathon" },
-  { type: "image" as const, src: "/images/hero-2.jpg", alt: "Nyala Workshop Session" },
-  { type: "image" as const, src: "/images/hero-3.jpg", alt: "Nyala Community Event" },
+  { type: "image" as const, src: "/images/hero-1.jpg", alt: "Nyala Labs hackathon" },
+  { type: "image" as const, src: "/images/hero-2.jpg", alt: "Nyala Labs workshop" },
+  { type: "image" as const, src: "/images/hero-3.jpg", alt: "Nyala Labs community event" },
 ];
 
 export const mockBlogPosts: BlogPost[] = [
@@ -22,7 +22,7 @@ export const mockBlogPosts: BlogPost[] = [
     excerpt:
       "A behind-the-scenes look at our team's journey through sleepless nights, countless bugs, and the thrill of shipping something real.",
     coverImage: "/images/blog-1.jpg",
-    author: "Nyala Team",
+    author: "Nyala Labs",
     categories: ["Hackathon", "Development"],
     publishedAt: "2025-12-15",
     readingTime: 5,
@@ -59,7 +59,7 @@ export const mockBlogPosts: BlogPost[] = [
     excerpt:
       "Tips and tricks for delivering impactful tech talks that actually keep your audience awake.",
     coverImage: "/images/blog-4.jpg",
-    author: "Nyala Team",
+    author: "Nyala Labs",
     categories: ["Skills", "Community"],
     publishedAt: "2025-09-18",
     readingTime: 4,
@@ -78,7 +78,7 @@ export const mockBlogPosts: BlogPost[] = [
   },
   {
     _id: "6",
-    title: "Recap: Nyala Tech Summit 2025",
+    title: "Recap: Nyala Labs Tech Summit 2025",
     slug: "Tech-Summit-Recap",
     excerpt:
       "Highlights from our biggest event yet — featuring industry speakers, workshops, and a lot of pizza.",
@@ -149,7 +149,7 @@ export const mockCommittee: CommitteeMember[] = [
     name: "david okonkwo",
     role: "education lead",
     image: "/images/committee/member-7.jpg",
-    bio: "believes in learning by doing. workshop facilitator and mentor to first-year students.",
+    bio: "believes in learning by doing. workshop facilitator and mentor to newcomers.",
     linkedin: "https://linkedin.com",
     order: 7,
   },
@@ -167,8 +167,8 @@ export const mockCommittee: CommitteeMember[] = [
 export const mockActivities: Activity[] = [
   {
     _id: "1",
-    title: "Nyala Hackathon 2026",
-    description: "48-hour hackathon open to all students. build something amazing.",
+    title: "Nyala Labs Hackathon 2026",
+    description: "48-hour hackathon open to youth and builders. build something amazing.",
     date: "2026-04-15",
     location: "Campus Innovation Hub",
     image: "/images/activity-1.jpg",
@@ -198,37 +198,43 @@ export const timelineEvents: TimelineEntry[] = [
   {
     year: "2023",
     title: "The Spark",
-    description: "A group of passionate students had a vision — to build a tech community that actually builds things.",
+    description:
+      "Young people named a shared goal: a tech community centred on building, mentoring, and learning together—not only consuming content, but shipping real work.",
     type: "milestone",
   },
   {
     year: "2023",
-    title: "First Rejection",
-    description: "Applied for official club status at Monash. Rejected. \"Not enough differentiation from existing clubs.\"",
+    title: "First recognition bid",
+    description:
+      "We put forward an early application for formal recognition. The outcome was not a yes—yet the feedback pushed us to sharpen what makes Nyala Labs distinct and sustainable.",
     type: "setback",
   },
   {
     year: "2024",
-    title: "Second Rejection",
-    description: "Tried again with a stronger proposal. Rejected again. But the team refused to give up.",
+    title: "Second recognition bid",
+    description:
+      "We returned with a clearer mission and plan. The decision was still no for official recognition—so we doubled down on consistent programming and an open door for new members.",
     type: "setback",
   },
   {
     year: "2024",
-    title: "Building Anyway",
-    description: "Started hosting unofficial workshops, hackathons, and meetups. The community grew organically.",
+    title: "Proof in the room",
+    description:
+      "Workshops, hackathons, and meetups continued—youth-led, welcoming to beginners, and focused on outcomes. Participation became the clearest signal of demand.",
     type: "milestone",
   },
   {
     year: "2025",
-    title: "Nyala is Born",
-    description: "Third time's the charm. Officially recognized as a university club. The trail was blazed.",
+    title: "Nyala Labs is born",
+    description:
+      "Officially recognised as a youth society under the Ministry of Youth and Sports—a formal home for the community we had been building with peers, mentors, and supporters.",
     type: "achievement",
   },
   {
     year: "2025",
-    title: "First Major Event",
-    description: "Hosted the Nyala Tech Summit with 200+ attendees, industry speakers, and student showcases.",
+    title: "First major summit",
+    description:
+      "Hosted the Nyala Labs Tech Summit with 200+ attendees, industry voices, and youth showcases—evidence of what sustained energy and teamwork can convene when we show up for the community.",
     type: "achievement",
   },
 ];
@@ -236,27 +242,32 @@ export const timelineEvents: TimelineEntry[] = [
 export const aims: Aim[] = [
   {
     title: "Build",
-    description: "Create real projects that solve real problems. No more tutorial hell.",
+    description:
+      "Ship projects that address real needs—prioritising practical outcomes, teamwork, and accountability over endless tutorials.",
     icon: "/images/icons/code.png",
   },
   {
     title: "Learn",
-    description: "Peer-to-peer knowledge sharing through workshops, talks, and hands-on sessions.",
+    description:
+      "Peer-led teaching and mentorship through workshops, talks, and hands-on sessions—meet people where they are, from first lines of code to advanced builds.",
     icon: "/images/icons/learn.png",
   },
   {
     title: "Connect",
-    description: "Bridge the gap between students and industry through networking and mentorship.",
+    description:
+      "Open pathways between young people, alumni, and industry—networking and mentorship grounded in curiosity and mutual respect.",
     icon: "/images/icons/connect.png",
   },
   {
     title: "Compete",
-    description: "Represent the university in hackathons, coding competitions, and tech challenges.",
+    description:
+      "Represent peers and our youth society with integrity in hackathons, competitions, and collaborative challenges—win with craft, not cynicism.",
     icon: "/images/icons/compete.png",
   },
   {
     title: "Innovate",
-    description: "Push boundaries with emerging tech — ai, blockchain, iot, and whatever comes next.",
+    description:
+      "Explore emerging technology with care—AI, blockchain, IoT—and ask not only what we can build, but what we should build for people.",
     icon: "/images/icons/innovate.png",
   },
 ];

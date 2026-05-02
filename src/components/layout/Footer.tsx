@@ -28,14 +28,15 @@ export default function Footer() {
               className="font-mono text-xl font-bold tracking-tighter"
               whileHover={{ scale: 1.02 }}
             >
-              <span className="text-nyala-red">n</span>
+              <span className="text-nyala-red">N</span>
               <span className="text-nyala-yellow">y</span>
-              <span className="text-nyala-white">ala labs</span>
+              <span className="text-nyala-white">ala </span>
+              <span className="text-nyala-yellow">Labs</span>
             </motion.h3>
             <p className="mt-3 font-mono text-xs leading-relaxed text-nyala-gray-muted">
-              Nyala Labs is a Malaysia-based youth community for builders, creators, and
-              innovators who are passionate about technology and innovation especially in the field of AI. 
-              We are a vibrant comminuty wish to learn and grow together.
+              Nyala Labs is a Malaysia-based recognised youth society under the Ministry of
+              Youth and Sports—a community for builders, creators, and innovators passionate
+              about technology, especially AI. We learn and grow together.
             </p>
           </div>
 

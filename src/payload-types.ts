@@ -180,6 +180,9 @@ export interface BlogPost {
     [k: string]: unknown;
   } | null;
   coverImage: number | Media;
+  /**
+   * Byline shown on posts (use "Nyala Labs" for official updates unless crediting a named author).
+   */
   author: string;
   categories?:
     | (

@@ -13,6 +13,7 @@ import { News } from "./collections/News";
 import { Media } from "./collections/Media";
 import { Users } from "./collections/Users";
 import { Homepage } from "./globals/Homepage";
+import { migrations } from "./migrations";
 
 const filename = fileURLToPath(import.meta.url);
 const dirname = path.dirname(filename);
@@ -73,8 +74,12 @@ export default buildConfig({
     pool: {
       connectionString: process.env.DATABASE_URL,
     },
+    prodMigrations: migrations,
   }),
   admin: {
+    meta: {
+      titleSuffix: "— Nyala Labs",
+    },
     user: "users",
     importMap: {
       baseDir: path.resolve(dirname),

@@ -8,9 +8,9 @@ import { fetchHomepage } from "@/lib/cms-client";
 import type { HeroMediaItem } from "@/types";
 
 const fallbackHeroMedia: HeroMediaItem[] = [
-  { type: "image", src: "/images/hero-1.jpg", alt: "Nyala Team Hackathon" },
-  { type: "image", src: "/images/hero-2.jpg", alt: "Nyala Workshop Session" },
-  { type: "image", src: "/images/hero-3.jpg", alt: "Nyala Community Event" },
+  { type: "image", src: "/images/hero-1.jpg", alt: "Nyala Labs hackathon" },
+  { type: "image", src: "/images/hero-2.jpg", alt: "Nyala Labs workshop" },
+  { type: "image", src: "/images/hero-3.jpg", alt: "Nyala Labs community event" },
 ];
 
 interface HeroVideoSectionProps {
@@ -138,7 +138,7 @@ export default function HeroVideoSection({ initialHeroMedia }: HeroVideoSectionP
           transition={{ duration: 0.6, delay: 0.5 }}
           className="mb-4 font-mono text-xs tracking-[0.3em] text-nyala-red uppercase"
         >
-          ~/nyala &gt; init
+          ~/nyala-labs &gt; init
         </motion.div>
 
         {/* main tagline */}
@@ -163,7 +163,7 @@ export default function HeroVideoSection({ initialHeroMedia }: HeroVideoSectionP
           transition={{ duration: 0.6, delay: 1.2 }}
           className="mx-auto mt-8 max-w-xl font-mono text-sm leading-relaxed text-nyala-gray-muted md:text-base"
         >
-          A university club for builders, creators, and innovators.
+          A recognised youth society for builders, creators, and innovators.
           <br />
           Reject the ordinary. Build something real.
         </motion.p>

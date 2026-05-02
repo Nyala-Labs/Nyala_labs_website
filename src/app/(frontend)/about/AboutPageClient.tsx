@@ -29,22 +29,28 @@ export default function AboutPageClient({ committee }: AboutPageClientProps) {
           className="mb-4"
         >
           <span className="font-mono text-xs uppercase tracking-[0.3em] text-nyala-red">
-            ~/nyala/about &gt;
+            ~/nyala-labs/about &gt;
           </span>
         </motion.div>
 
         <SectionHeading
           title="our story"
-          subtitle="how a group of rejected club applicants built something real"
+          subtitle="A youth-led builder community that grows together through consistency and proof"
         />
 
-        <ScrollReveal className="mx-auto mb-16 max-w-3xl">
+        <ScrollReveal className="mx-auto mb-12 max-w-2xl">
           <div className="border-l-2 border-nyala-red pl-6">
             <p className="font-mono text-sm leading-relaxed text-nyala-gray-muted">
-              Nyala Labs wasn&apos;t born in a boardroom. It was born from rejection —
-              twice. When the university said &quot;no,&quot; we didn&apos;t stop
-              building. We just built louder. This is the story of how persistence
-              turned a rejected proposal into a thriving community of builders.
+              Nyala Labs started with young people who wanted a hands-on tech community—learn
+              by shipping, welcome newcomers, and grow together instead of building in
+              isolation. Early bids for official recognition did not succeed; we treated
+              that as feedback, tightened how we work, and kept running open workshops and
+              meetups until participation told the story for us. Today we are a{" "}
+              <span className="rounded-sm bg-nyala-yellow/15 px-1.5 py-0.5 font-semibold text-nyala-yellow">
+                recognised youth society under the Ministry of Youth and Sports
+              </span>
+              : a home for youth who care about craft, collaboration, and lifting the
+              next person up.
             </p>
           </div>
         </ScrollReveal>
@@ -52,7 +58,7 @@ export default function AboutPageClient({ committee }: AboutPageClientProps) {
         <section className="py-12">
           <SectionHeading
             title="the journey"
-            subtitle="milestones, setbacks, and breakthroughs"
+            subtitle="milestones, learning moments, and breakthroughs"
             align="center"
           />
           <Timeline events={timelineEvents} />
@@ -63,7 +69,7 @@ export default function AboutPageClient({ committee }: AboutPageClientProps) {
         <section className="py-24">
           <SectionHeading
             title="our aims"
-            subtitle="the trail we're blazing — one milestone at a time"
+            subtitle="what we stand for—and what we invite youth, partners, and mentors to build with us"
             align="center"
             glow
           />
@@ -76,7 +82,7 @@ export default function AboutPageClient({ committee }: AboutPageClientProps) {
           <div className="mb-12 flex items-end justify-between">
             <SectionHeading
               title="meet the team"
-              subtitle="the people behind the trail"
+              subtitle="youth leaders stewarding programs, partnerships, and community culture"
               className="mb-0"
             />
             <ScrollReveal delay={0.3}>

@@ -1,6 +1,6 @@
-# nyala — blaze the trail
+# Nyala Labs — blaze the trail
 
-> a modern, animation-rich website for the nyala university club.  
+> a modern, animation-rich website for Nyala Labs, a youth tech community.  
 > built with next.js 15, tailwind css, payload cms, and framer motion.
 
 ---
@@ -40,7 +40,7 @@ pnpm dev
 ## folder structure
 
 ```
-nyala/
+Nyala_labs_website/
 ├── public/
 │   ├── images/              # static images (hero, blog, events)
 │   │   └── committee/       # member profile photos
@@ -320,7 +320,7 @@ place in `images/committee/`:
 ## future feature suggestions
 
 1. **interactive event map** — google maps integration showing past/upcoming event locations
-2. **live activity feed** — real-time feed of club activity (social media aggregation)
+2. **live activity feed** — real-time feed of community activity (social media aggregation)
 3. **animated statistics section** — counting animations for member count, events, projects
 4. **dynamic timeline** — cms-driven timeline that content editors can update
 5. **interactive community graph** — d3.js network graph showing member connections
@@ -329,7 +329,7 @@ place in `images/committee/`:
 8. **interactive trail visualization** — 3d or advanced svg trail with three.js
 9. **event rsvp system** — integrated event registration with email confirmations
 10. **member portfolio showcase** — gallery of member projects and achievements
-11. **ai chatbot** — club FAQ bot using openai or similar
+11. **ai chatbot** — society FAQ bot using openai or similar
 12. **newsletter integration** — email signup with resend or mailchimp
 13. **blog search** — full-text search across blog posts
 14. **reading progress bar** — progress indicator on individual blog posts

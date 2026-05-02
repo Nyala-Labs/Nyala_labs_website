@@ -124,7 +124,7 @@ export const mapPayloadBlogPost = (doc: PayloadDoc): BlogPost => ({
   slug: String(doc.slug || ""),
   excerpt: String(doc.excerpt || ""),
   coverImage: resolveImageUrl(doc.coverImage, placeholderBlogImage),
-  author: String(doc.author || "Nyala Team"),
+  author: String(doc.author || "Nyala Labs"),
   categories: Array.isArray(doc.categories) ? (doc.categories as string[]) : [],
   publishedAt: String(doc.publishedAt || new Date().toISOString()),
   readingTime: Number(doc.readingTime || 1),

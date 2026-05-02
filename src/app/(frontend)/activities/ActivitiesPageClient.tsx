@@ -22,7 +22,7 @@ export default function ActivitiesPageClient({ activities }: ActivitiesPageClien
           className="mb-4"
         >
           <span className="font-mono text-xs uppercase tracking-[0.3em] text-nyala-red">
-            ~/nyala/activities &gt;
+            ~/nyala-labs/activities &gt;
           </span>
         </motion.div>
 

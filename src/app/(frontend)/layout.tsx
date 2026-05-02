@@ -22,18 +22,19 @@ const pixelify = Pixelify_Sans({
   variable: "--font-pixelify",
 });
 
+const siteDescription =
+  "Nyala Labs is a Malaysia-based recognised youth society under the Ministry of Youth and Sports—a community for builders, creators, and innovators passionate about technology, especially AI. We learn and grow together.";
+
 export const metadata: Metadata = {
   title: "Nyala Labs — Blaze the Trail",
-  description:
-    "A Malaysia-based youth community for builders, creators, and innovators who are passionate about technology and innovation especially in the field of AI. We are a vibrant comminuty wish to learn and grow together.",
+  description: siteDescription,
   icons: {
     icon: "/favicon/nyalalabslogo.svg",
     shortcut: "/favicon/nyalalabslogo.svg",
   },
   openGraph: {
     title: "Nyala Labs — Blaze the Trail",
-    description:
-      "A Malaysia-based youth community for builders, creators, and innovators who are passionate about technology and innovation especially in the field of AI. We are a vibrant comminuty wish to learn and grow together.",
+    description: siteDescription,
     type: "website",
     images: [
       {
@@ -47,8 +48,7 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "Nyala Labs — Blaze the Trail",
-    description:
-      "A Malaysia-based youth community for builders, creators, and innovators who are passionate about technology and innovation especially in the field of AI.",
+    description: siteDescription,
     images: ["/og-image.jpg"],
   },
 };

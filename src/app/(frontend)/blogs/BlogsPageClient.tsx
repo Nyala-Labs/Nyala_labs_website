@@ -42,13 +42,13 @@ export default function BlogsPageClient({ initialPosts }: BlogsPageClientProps) 
           className="mb-4"
         >
           <span className="font-mono text-xs uppercase tracking-[0.3em] text-nyala-red">
-            ~/nyala/blogs &gt;
+            ~/nyala-labs/blogs &gt;
           </span>
         </motion.div>
 
         <SectionHeading
           title="from the trail"
-          subtitle="stories, guides, and insights from the nyala community"
+          subtitle="stories, guides, and insights from the Nyala Labs community"
         />
 
         {featuredPost && (

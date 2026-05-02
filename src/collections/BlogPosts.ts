@@ -60,6 +60,10 @@ export const BlogPosts: CollectionConfig = {
       name: "author",
       type: "text",
       required: true,
+      defaultValue: "Nyala Labs",
+      admin: {
+        description: 'Byline shown on posts (use "Nyala Labs" for official updates unless crediting a named author).',
+      },
     },
     {
       name: "categories",

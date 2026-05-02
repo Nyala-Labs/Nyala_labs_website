@@ -15,13 +15,13 @@ export default function NewsPage() {
           className="mb-4"
         >
           <span className="font-mono text-xs uppercase tracking-[0.3em] text-nyala-red">
-            ~/nyala/news &gt;
+            ~/nyala-labs/news &gt;
           </span>
         </motion.div>
 
         <SectionHeading
           title="news"
-          subtitle="updates, announcements, and everything happening at nyala"
+          subtitle="updates, announcements, and everything happening at Nyala Labs"
         />
 
         <ScrollReveal className="mx-auto max-w-2xl text-center">

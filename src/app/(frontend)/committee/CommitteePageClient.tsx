@@ -21,13 +21,13 @@ export default function CommitteePageClient({ members }: CommitteePageClientProp
           className="mb-4"
         >
           <span className="font-mono text-xs uppercase tracking-[0.3em] text-nyala-red">
-            ~/nyala/committee &gt;
+            ~/nyala-labs/committee &gt;
           </span>
         </motion.div>
 
         <SectionHeading
           title="the people behind the trail"
-          subtitle="meet the team that keeps nyala moving forward"
+          subtitle="meet the team that keeps Nyala Labs moving forward"
         />
 
         <motion.div

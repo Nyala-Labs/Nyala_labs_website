@@ -192,7 +192,7 @@ export default function HomePageClient({
                 rel="noopener noreferrer"
                 className="border border-nyala-red bg-nyala-red px-8 py-3 font-mono text-xs uppercase tracking-[0.2em] text-nyala-white transition-all duration-300 hover:bg-nyala-red-dark hover:shadow-lg hover:shadow-nyala-red/20"
               >
-                Join Nyala →
+                Join Nyala Labs →
               </a>
               <a
                 href="/about"

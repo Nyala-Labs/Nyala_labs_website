@@ -1,8 +1,22 @@
 /**
  * Fail fast during `payload migrate` / `next build` with readable errors.
- * ENOTFOUND hostname "base" usually means DATABASE_URL used host `base`
- * (placeholder) or an unescaped `@` in the password broke parsing.
+ * Uses pg’s own connection-string parser (same as production) — not `new URL()`, which
+ * rejects many valid Postgres URLs at build time.
  */
+import { parse as parsePgConn } from "pg-connection-string";
+
+function normalizeDatabaseUrl(rawInput: string): string {
+  let s = rawInput.trim();
+  /** Vercel/UI copy-paste sometimes wraps the whole value in quotes — invalid for pg */
+  if (
+    (s.startsWith('"') && s.endsWith('"')) ||
+    (s.startsWith("'") && s.endsWith("'"))
+  ) {
+    s = s.slice(1, -1).trim();
+  }
+  return s.replace(/\r\n|\n|\r/g, "").trim();
+}
+
 export function assertPayloadBuildEnv(): void {
   const raw = process.env.DATABASE_URL;
   if (!raw?.trim()) {
@@ -11,19 +25,33 @@ export function assertPayloadBuildEnv(): void {
     );
   }
 
+  const normalized = normalizeDatabaseUrl(raw);
   let hostname: string;
+
   try {
-    const pseudo = raw.replace(/^postgres(ql)?:/i, "http:");
-    hostname = new URL(pseudo).hostname;
+    const parsed = parsePgConn(normalized);
+    hostname = (parsed.host || "").trim();
   } catch {
     throw new Error(
-      'DATABASE_URL could not be parsed. If the password contains "@", ":", or "/", URL-encode those characters (e.g. "@" → "%40").',
+      "DATABASE_URL could not be parsed (PG URL rules). Common fixes: remove outer \"quotes\" or line breaks in Vercel; keep the postgresql:// prefix; if your password has @ : / or #, use percent-encoding (e.g. @ → %40).",
     );
   }
 
   if (!hostname) {
     throw new Error(
-      'DATABASE_URL has no hostname after the last "@". Check the host part (e.g. ...@your-db-host.example.com:5432/... ).',
+      'DATABASE_URL parsed with an empty host. Use a form like postgresql://user:password@your-host.example.com:5432/dbname — or a valid socket path only for local builds.',
+    );
+  }
+
+  if (process.env.DEBUG_PAYLOAD_ENV === "1") {
+    console.log("[payload-env] DATABASE_URL host (debug):", hostname);
+    console.log(
+      "[payload-env] CLOUDFLARE_R2_ACCOUNT_ID set:",
+      Boolean(process.env.CLOUDFLARE_R2_ACCOUNT_ID?.trim()),
+    );
+    console.log(
+      "[payload-env] NEXT_PUBLIC_SERVER_URL:",
+      process.env.NEXT_PUBLIC_SERVER_URL || "(unset)",
     );
   }
 

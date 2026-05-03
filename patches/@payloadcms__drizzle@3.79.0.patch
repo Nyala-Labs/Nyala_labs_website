@@ -1,0 +1,40 @@
+diff --git a/dist/migrate.js b/dist/migrate.js
+index 2dbae1fcd7f41db57493a3b004d6826ea55d6ac0..a7891a37f57f572edc7d060fa73dee1d974a2a64 100644
+--- a/dist/migrate.js
++++ b/dist/migrate.js
+@@ -28,16 +28,26 @@ export const migrate = async function migrate(args) {
+             sort: '-name'
+         }));
+         if (migrationsInDB.find((m)=>m.batch === -1)) {
+-            const { confirm: runMigrations } = await prompts({
+-                name: 'confirm',
+-                type: 'confirm',
+-                initial: false,
+-                message: "It looks like you've run Payload in dev mode, meaning you've dynamically pushed changes to your database.\n\n" + "If you'd like to run migrations, data loss will occur. Would you like to proceed?"
+-            }, {
+-                onCancel: ()=>{
+-                    process.exit(0);
++            const inCi = process.env.CI === '1' || process.env.VERCEL === '1';
++            let runMigrations;
++            if (inCi) {
++                runMigrations = process.env.PAYLOAD_ACCEPT_DEV_PUSH_MIGRATE === 'true';
++                if (!runMigrations) {
++                    throw new Error('Payload migrate is waiting for interactive confirmation because dev mode pushed schema (payload_migrations.batch = -1). ' + 'CI has no TTY, so this hangs forever without this check. Fix: on your DB run `DELETE FROM payload_migrations WHERE batch = -1` after you have run migrations safely (usually `payload migrate` locally once and confirm), ' + 'or set PAYLOAD_ACCEPT_DEV_PUSH_MIGRATE=true on Vercel only if you accept possible data loss from running migrations after a dev push.');
+                 }
+-            });
++            } else {
++                const { confirm } = await prompts({
++                    name: 'confirm',
++                    type: 'confirm',
++                    initial: false,
++                    message: "It looks like you've run Payload in dev mode, meaning you've dynamically pushed changes to your database.\n\n" + "If you'd like to run migrations, data loss will occur. Would you like to proceed?"
++                }, {
++                    onCancel: ()=>{
++                        process.exit(0);
++                    }
++                });
++                runMigrations = confirm;
++            }
+             if (!runMigrations) {
+                 process.exit(0);
+             }

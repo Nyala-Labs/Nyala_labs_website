@@ -27,9 +27,11 @@ export function assertPayloadBuildEnv(): void {
 
   const normalized = normalizeDatabaseUrl(raw);
   let hostname: string;
+  let parsedForDiag: ReturnType<typeof parsePgConn> | undefined;
 
   try {
     const parsed = parsePgConn(normalized);
+    parsedForDiag = parsed;
     hostname = (parsed.host || "").trim();
   } catch {
     throw new Error(
@@ -71,8 +73,20 @@ export function assertPayloadBuildEnv(): void {
       "host.docker.internal",
     ]);
     if (nonPublicDbHosts.has(hostname)) {
+      const user = parsedForDiag?.user || "(unknown)";
+      const port = parsedForDiag?.port ?? "(default)";
+      const database = parsedForDiag?.database || "(unknown)";
+      const looksLikePlaceholderHost = /@base(?::|\/|\?|$)/i.test(normalized);
       throw new Error(
-        `DATABASE_URL uses host "${hostname}", which is not a public DNS name. On Vercel, set DATABASE_URL to your real Postgres host (e.g. Neon, Supabase, or db.yourdomain.com with ?sslmode=require), not a Compose service name or placeholder.`,
+        [
+          `DATABASE_URL parses host "${hostname}" (invalid for Vercel). Parsed user=${user} port=${port} database=${database} — password is not shown.`,
+          `Fix: use postgresql://payload:PASSWORD@db.nyalalabs.org:5432/nyala_payload?sslmode=require`,
+          `so the segment immediately after the last @ is db.nyalalabs.org, not "${hostname}".`,
+          looksLikePlaceholderHost
+            ? `Your URL text contains "@base" before the port or path — replace that host with db.nyalalabs.org.`
+            : `If the host in the dashboard looks correct, an unescaped @ in the password breaks parsing — encode @ as %40.`,
+          `Set DATABASE_URL for the same Vercel environment as this build (Production vs Preview). Redeploy after saving.`,
+        ].join(" "),
       );
     }
     const accountId = process.env.CLOUDFLARE_R2_ACCOUNT_ID?.trim();

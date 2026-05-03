@@ -6,7 +6,8 @@
   "packageManager": "pnpm@10.17.1",
   "scripts": {
     "dev": "next dev",
-    "build": "payload migrate && payload generate:importmap && next build",
+    "build": "payload generate:importmap && next build",
+    "migrate": "payload migrate",
     "start": "next start",
     "lint": "next lint",
     "generate:types": "payload generate:types",

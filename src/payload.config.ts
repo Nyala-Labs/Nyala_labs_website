@@ -1,4 +1,4 @@
-import "./env-check.js";
+import "./env-check";
 import path from "path";
 import { fileURLToPath } from "url";
 import sharp from "sharp";

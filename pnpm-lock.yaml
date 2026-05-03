@@ -4,6 +4,11 @@ settings:
   autoInstallPeers: true
   excludeLinksFromLockfile: false
 
+patchedDependencies:
+  '@payloadcms/drizzle@3.79.0':
+    hash: 42d3a1defc4ae53687e6f194da6e45b4167909448beb903a52fe9f052dd446fe
+    path: patches/@payloadcms__drizzle@3.79.0.patch
+
 importers:
 
   .:
@@ -5635,7 +5640,7 @@ snapshots:
 
   '@payloadcms/db-postgres@3.79.0(@libsql/client@0.14.0)(payload@3.79.0(graphql@16.13.1)(typescript@5.9.3))':
     dependencies:
-      '@payloadcms/drizzle': 3.79.0(@libsql/client@0.14.0)(@types/pg@8.10.2)(payload@3.79.0(graphql@16.13.1)(typescript@5.9.3))(pg@8.16.3)
+      '@payloadcms/drizzle': 3.79.0(patch_hash=42d3a1defc4ae53687e6f194da6e45b4167909448beb903a52fe9f052dd446fe)(@libsql/client@0.14.0)(@types/pg@8.10.2)(payload@3.79.0(graphql@16.13.1)(typescript@5.9.3))(pg@8.16.3)
       '@types/pg': 8.10.2
       console-table-printer: 2.12.1
       drizzle-kit: 0.31.7
@@ -5676,7 +5681,7 @@ snapshots:
       - sqlite3
       - supports-color
 
-  '@payloadcms/drizzle@3.79.0(@libsql/client@0.14.0)(@types/pg@8.10.2)(payload@3.79.0(graphql@16.13.1)(typescript@5.9.3))(pg@8.16.3)':
+  '@payloadcms/drizzle@3.79.0(patch_hash=42d3a1defc4ae53687e6f194da6e45b4167909448beb903a52fe9f052dd446fe)(@libsql/client@0.14.0)(@types/pg@8.10.2)(payload@3.79.0(graphql@16.13.1)(typescript@5.9.3))(pg@8.16.3)':
     dependencies:
       console-table-printer: 2.12.1
       dequal: 2.0.3

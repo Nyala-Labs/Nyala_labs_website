@@ -42,7 +42,7 @@ export default function Navbar() {
               className="h-12 w-12 shrink-0 opacity-90 transition-transform duration-300 group-hover:scale-110"
             />
             <motion.span
-              className="font-mono text-xl font-bold tracking-tighter text-nyala-white"
+              className="font-pixel text-xl font-bold tracking-tighter text-nyala-white"
               whileHover={{ scale: 1.05 }}
             >
               <span className="text-nyala-white">NYALA</span>

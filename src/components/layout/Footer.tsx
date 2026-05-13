@@ -25,7 +25,7 @@ export default function Footer() {
           {/* brand */}
           <div>
             <motion.h3
-              className="font-mono text-xl font-bold tracking-tighter "
+              className="font-pixel text-xl font-bold tracking-tighter "
               whileHover={{ scale: 1.02 }}
             >
               <img
@@ -92,7 +92,7 @@ export default function Footer() {
               href="https://forms.gle/f3g69MxUrquDFWQZ9"
               target="_blank"
               rel="noopener noreferrer"
-              className="mt-3 inline-block w-fit border border-nyala-red px-5 py-2 font-mono text-xs uppercase tracking-widest text-nyala-red transition-all duration-300 hover:bg-nyala-red hover:text-nyala-white"
+              className="mt-3 inline-block w-fit border border-nyala-red bg-nyala-red px-5 py-2 tracking-widest font-mono text-xs uppercase text-nyala-white transition-all duration-300 hover:bg-nyala-red-dark hover:shadow-lg hover:shadow-nyala-red/20"
             >
               Apply now →
             </a>

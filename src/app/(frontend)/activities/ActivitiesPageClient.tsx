@@ -91,6 +91,37 @@ export default function ActivitiesPageClient({
           subtitle="a living timeline of everything we build, learn, and ignite"
         />
 
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.15 }}
+          className="mb-6"
+        >
+          <div className="group relative overflow-hidden border border-nyala-gray-light bg-nyala-gray/80 p-5 transition-all duration-500 hover:-translate-y-1 hover:border-nyala-red/60 hover:shadow-[0_0_24px_rgba(198,40,40,0.15)] md:p-6">
+            <div className="pointer-events-none absolute -left-16 top-1/2 h-32 w-32 -translate-y-1/2 rounded-full bg-nyala-red/10 blur-3xl" />
+            <div className="pointer-events-none absolute -right-16 top-1/2 h-32 w-32 -translate-y-1/2 rounded-full bg-nyala-yellow/10 blur-3xl" />
+            <div className="relative z-10 flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
+              <div>
+                <p className="font-mono text-[10px] uppercase tracking-[0.25em] text-nyala-red">
+                  spotlight
+                </p>
+                <h3 className="mt-2 font-mono text-xl font-bold text-nyala-yellow md:text-2xl">
+                  Chutes Hack Malaysia 2026
+                </h3>
+                <p className="mt-1 font-mono text-xs text-nyala-gray-muted md:text-sm">
+                  5-day hybrid AI hackathon by Nyala Labs & Chutes.
+                </p>
+              </div>
+              <a
+                href="/chutes-hackathon"
+                className="w-fit rounded-none border border-nyala-red bg-nyala-red px-6 py-2.5 font-mono text-xs uppercase tracking-[0.2em] text-nyala-white transition-all duration-300 hover:bg-nyala-red-dark hover:shadow-lg hover:shadow-nyala-red/20"
+              >
+                View Chutes Hackathon Details
+              </a>
+            </div>
+          </div>
+        </motion.div>
+
         {/* Momentum Bar */}
         <MomentumBar events={activities} tick={tick} />
 

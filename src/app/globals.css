@@ -8,6 +8,22 @@
   font-display: swap;
 }
 
+@font-face {
+  font-family: "Glacial Indifference";
+  src: url("/fonts/glacial-indifference/GlacialIndifference-Regular.otf") format("opentype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Glacial Indifference";
+  src: url("/fonts/glacial-indifference/GlacialIndifference-Bold.otf") format("opentype");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
 @theme {
   --color-nyala-red: #c62828;
   --color-nyala-red-light: #ef5350;
@@ -22,7 +38,8 @@
   --color-nyala-gray-muted: #6b6b6b;
 
   --font-retropix: "RetroPix";
-  --font-mono: var(--font-retropix), "Courier New", monospace;
+  --font-glacial: "Glacial Indifference", sans-serif;
+  --font-mono: var(--font-glacial);
   --font-pixel: var(--font-retropix), cursive;
 
   --animate-blink: blink 1s step-end infinite;
@@ -129,7 +146,7 @@ html {
 }
 
 body {
-  font-family: var(--font-retropix), var(--font-mono);
+  font-family: var(--font-glacial);
   font-size: 1rem;
   line-height: 1.65;
   background-color: var(--color-nyala-black);

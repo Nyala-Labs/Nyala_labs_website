@@ -10,37 +10,13 @@ const partnerships = [
   {
     id: 1,
     name: 'Partner One',
-    logo: './images/partners/google_logo.webp',
-    url: '#',
+    logo: './images/partners/chutes-logo.webp',
+    url: 'https://chutes.ai/',
   },
   {
     id: 2,
     name: 'Partner Two',
     logo: './images/partners/partner2.png',
-    url: '#',
-  },
-  {
-    id: 3,
-    name: 'Partner Three',
-    logo: './images/partners/partner3.png',
-    url: '#',
-  },
-  {
-    id: 4,
-    name: 'Partner Four',
-    logo: './images/partners/partner4.png',
-    url: '#',
-  },
-  {
-    id: 5,
-    name: 'Partner Five',
-    logo: './images/partners/partner5.png',
-    url: '#',
-  },
-  {
-    id: 6,
-    name: 'Partner Six',
-    logo: './images/partners/partner6.png',
     url: '#',
   },
 ];

@@ -76,6 +76,7 @@ export default buildConfig({
       connectionString: process.env.DATABASE_URL,
     },
     prodMigrations: migrations,
+    push: process.env.NODE_ENV !== "production",
   }),
   admin: {
     meta: {
@@ -91,9 +92,13 @@ export default buildConfig({
         if (data?.slug) {
           return `${base}/blogs/${data.slug}`;
         }
+        // Activities don't have slugs but they have titles/locations
+        if (data?.startDate && !isNaN(new Date(data.startDate).getTime())) {
+          return `${base}/activities`;
+        }
         return base;
       },
-      collections: ["blog-posts"],
+      collections: ["blog-posts", "activities"],
       breakpoints: [
         { label: "Mobile", name: "mobile", width: 375, height: 667 },
         { label: "Tablet", name: "tablet", width: 768, height: 1024 },

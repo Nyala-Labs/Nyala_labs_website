@@ -13,12 +13,6 @@ const partnerships = [
     logo: './images/partners/chutes-logo.webp',
     url: 'https://chutes.ai/',
   },
-  {
-    id: 2,
-    name: 'Partner Two',
-    logo: './images/partners/partner2.png',
-    url: '#',
-  },
 ];
 
 // Convert partnerships to LogoLoop format

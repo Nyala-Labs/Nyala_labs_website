@@ -44,44 +44,63 @@ const prizeTracks = [
 const detailedSchedule = [
   {
     day: "01",
-    label: "MAY 18",
+    label: "MAY 18 – JUN 30",
     events: [
-      { time: "10:00 AM", name: "Check-in & Networking", note: "At INFINITY8 Sunway" },
-      { time: "12:30 PM", name: "Opening Ceremony", note: "Hackathon officially begins", highlight: true },
-      { time: "02:00 PM", name: "Chutes 101 Workshop", note: "Technical setup & credits" },
+      {
+        time: "Building Period",
+        name: "Team development window",
+        note: "Participants build in their own time and submit on Devpost by June 30, 11:59 PM.",
+        highlight: true,
+      },
+      {
+        time: "Ongoing",
+        name: "Weekly workshops",
+        note: "Recorded sessions available on Nyala Labs YouTube.",
+      },
+      {
+        time: "Ongoing",
+        name: "Discord support",
+        note: "Stay updated via Discord and ask questions there.",
+      },
     ],
   },
   {
     day: "02",
-    label: "MAY 19",
+    label: "JUL 4",
     events: [
-      { time: "11:00 AM", name: "Advanced GenAI Workshop", note: "Building with agents" },
-      { time: "04:00 PM", name: "Mentor Matchmaking", note: "Get expert feedback" },
+      {
+        time: "12:00 PM",
+        name: "Finalists announced",
+        note: "Top 5 teams per category revealed on Discord.",
+        highlight: true,
+      },
+      {
+        time: "Afternoon",
+        name: "Finalist prep window",
+        note: "Teams continue polishing pitches for closing ceremony.",
+      },
     ],
   },
   {
     day: "03",
-    label: "MAY 20",
+    label: "JUL 7",
     events: [
-      { time: "10:00 AM", name: "Mid-point Checkpoint", note: "Submission of draft ideas" },
-      { time: "08:00 PM", name: "Late Night Build", note: "Pizza & Coding" },
-    ],
-  },
-  {
-    day: "04",
-    label: "MAY 21",
-    events: [
-      { time: "02:00 PM", name: "Pitch Clinic", note: "Refine your presentation" },
-      { time: "11:59 PM", name: "Final Build Sprint", note: "Submission prep" },
-    ],
-  },
-  {
-    day: "05",
-    label: "MAY 22",
-    events: [
-      { time: "12:00 PM", name: "Devpost Deadline", note: "Final submission", highlight: true },
-      { time: "07:00 PM", name: "Finalist Pitches", note: "Live at Sunway Square" },
-      { time: "08:45 PM", name: "Winners Announced", note: "Closing ceremony", highlight: true },
+      {
+        time: "Hybrid",
+        name: "Closing Ceremony",
+        note: "WORQ Subang in person; judges join online.",
+        highlight: true,
+      },
+      {
+        time: "Live",
+        name: "Finalist pitches",
+        note: "5-minute demos and Q&A for judges.",
+      },
+      {
+        time: "Evening",
+        name: "Winner announcements",
+        note: "Prizes awarded for University, Corporate, and Chutes tracks.",
+      },
     ],
   },
 ];
@@ -175,7 +194,7 @@ export default function ChutesHackathonPage() {
             >
               <div className="mb-6 flex items-center gap-3">
                 <span className="bg-nyala-yellow px-2 py-1 font-mono text-[10px] font-bold uppercase tracking-widest text-nyala-black">
-                  5-Day Hackathon
+                  Hybrid Hackathon
                 </span>
                 <span className="font-mono text-[10px] tracking-[0.2em] text-nyala-gray-muted uppercase">
                   Nyala Labs × Chutes
@@ -189,9 +208,9 @@ export default function ChutesHackathonPage() {
               </h1>
               <div className="my-8 h-1 w-20 bg-nyala-red" />
               <p className="max-w-md font-mono text-lg leading-relaxed text-nyala-gray-muted">
-                Build real AI products. Get mentored. Win prizes. 
+                A youth-led AI hackathon that runs from May 18 to June 30, with a closing ceremony on July 7.
                 <strong className="block text-nyala-white mt-2 font-normal">
-                  Malaysia&apos;s first hybrid AI hackathon — held in Sunway and online.
+                  Use Chutes as your required compute provider, build hybrid-ready productivity solutions, and compete for cash prizes.
                 </strong>
               </p>
 
@@ -201,7 +220,7 @@ export default function ChutesHackathonPage() {
                     <svg className="h-5 w-5 text-nyala-red" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
                     </svg>
-                    <span className="font-mono text-sm text-nyala-white">May 18 – 22, 2026 · <span className="text-nyala-gray-muted text-xs">5 Days</span></span>
+                    <span className="font-mono text-sm text-nyala-white">May 18 – June 30, 2026 · <span className="text-nyala-gray-muted text-xs">Hybrid Build Window</span></span>
                   </div>
                   <div className="flex items-center gap-4">
                     <svg className="h-5 w-5 text-nyala-red" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -250,7 +269,7 @@ export default function ChutesHackathonPage() {
                 </div>
                 <div className="bg-nyala-black/50 p-10 backdrop-blur-sm border-l border-nyala-gray-light">
                   <span className="font-mono text-[10px] uppercase tracking-widest text-nyala-gray-muted">Duration</span>
-                  <p className="mt-2 font-glacial text-6xl font-bold text-nyala-white">5 DAYS</p>
+                  <p className="mt-2 font-glacial text-6xl font-bold text-nyala-white">6 WEEKS</p>
                 </div>
                 <div className="bg-nyala-black/50 p-10 backdrop-blur-sm border-t border-nyala-gray-light">
                   <span className="font-mono text-[10px] uppercase tracking-widest text-nyala-gray-muted">Format</span>
@@ -338,9 +357,9 @@ export default function ChutesHackathonPage() {
       {/* Detailed Schedule */}
       <section id="schedule" className="relative py-24">
         <div className="mx-auto max-w-7xl px-6">
-          <SectionHeading title="Full Schedule" subtitle="From kickoff to demo day — 5 days of intensity" />
+          <SectionHeading title="Full Schedule" subtitle="From kickoff to closing ceremony — a multi-week build journey" />
           
-          <div className="mt-16 grid gap-px bg-nyala-gray-light border border-nyala-gray-light md:grid-cols-5">
+          <div className="mt-16 grid gap-px bg-nyala-gray-light border border-nyala-gray-light md:grid-cols-3">
             {detailedSchedule.map((day, idx) => (
               <motion.div
                 key={day.day}
@@ -524,8 +543,28 @@ export default function ChutesHackathonPage() {
             </svg>
           </a>
           <p className="mt-8 font-mono text-[15px] text-nyala-gray-muted tracking-widest uppercase">Registration deadline: <span className="text-nyala-yellow">MAY 17, 2026</span></p>
+          <p className="mt-2 font-mono text-[12px] text-nyala-gray-muted">
+            Join the Discord for updates:
+            <a
+              href="https://discord.gg/MmncAPW9Wb"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="ml-2 inline-flex items-center gap-2 text-nyala-yellow hover:underline"
+            >
+              <img
+                src="/images/icons/discord.svg"
+                alt="Discord"
+                aria-hidden="false"
+                width={16}
+                height={16}
+                className="h-4 w-4 inline-block"
+              />
+              <span className="underline">discord.gg/MmncAPW9Wb</span>
+            </a>
+          </p>
         </div>
       </section>
     </div>
   );
 }
+

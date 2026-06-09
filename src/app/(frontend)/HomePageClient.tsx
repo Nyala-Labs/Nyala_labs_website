@@ -58,7 +58,7 @@ export default function HomePageClient({
                   Chutes Hack Malaysia 2026
                 </h2>
                 <p className="mt-2 font-mono text-xs text-nyala-gray-muted md:text-sm">
-                  May 18 - 22, 2026 | Hybrid | Free Entry
+                  May 18 - June 30, 2026 | Hybrid | Free Entry
                 </p>
               </div>
               <a
@@ -266,12 +266,12 @@ function HackathonActivityCard() {
         Chutes Hack Malaysia 2026
       </h3>
       <p className="mt-2 font-mono text-xs leading-relaxed text-nyala-gray-muted">
-        5-day hybrid AI hackathon by Nyala Labs & Chutes.
+        Multi-week hybrid AI hackathon by Nyala Labs & Chutes.
       </p>
       <div className="mt-4 space-y-1 font-mono text-[10px] text-nyala-gray-muted">
         <div className="flex items-center gap-2">
           <span className="text-nyala-yellow">📅</span>
-          <span>May 18 - 22, 2026</span>
+          <span>May 18 - June 30, 2026</span>
         </div>
         <div className="flex items-center gap-2">
           <span className="text-nyala-yellow">📍</span>

@@ -109,7 +109,7 @@ export default function ActivitiesPageClient({
                   Chutes Hack Malaysia 2026
                 </h3>
                 <p className="mt-1 font-mono text-xs text-nyala-gray-muted md:text-sm">
-                  5-day hybrid AI hackathon by Nyala Labs & Chutes.
+                  Multi-week hybrid AI hackathon by Nyala Labs & Chutes.
                 </p>
               </div>
               <a

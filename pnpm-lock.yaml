@@ -4,10 +4,7 @@ settings:
   autoInstallPeers: true
   excludeLinksFromLockfile: false
 
-patchedDependencies:
   '@payloadcms/drizzle@3.79.0':
-    hash: 42d3a1defc4ae53687e6f194da6e45b4167909448beb903a52fe9f052dd446fe
-    path: patches/@payloadcms__drizzle@3.79.0.patch
 
 importers:
 

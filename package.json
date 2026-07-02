@@ -4,6 +4,11 @@
   "private": true,
   "type": "module",
   "packageManager": "pnpm@10.17.1",
+  "pnpm": {
+    "patchedDependencies": {
+      "@payloadcms/drizzle@3.79.0": "patches/@payloadcms__drizzle@3.79.0.patch"
+    }
+  },
   "scripts": {
     "dev": "next dev",
     "build": "payload generate:importmap && next build",

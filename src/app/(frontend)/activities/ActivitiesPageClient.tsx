@@ -2,10 +2,11 @@
 
 import { useState, useMemo, useCallback } from "react";
 import { motion } from "framer-motion";
+import { FiChevronDown } from "react-icons/fi";
 import SectionHeading from "@/components/ui/SectionHeading";
 import MomentumBar from "@/components/activities/MomentumBar";
 import Timeline from "@/components/activities/Timeline";
-import SmartCalendar from "@/components/activities/SmartCalendar";
+import SmartCalendar from "@/components/ui/SmartCalendar";
 import EventFocusModal from "@/components/activities/EventFocusModal";
 import { useTimeAwareness } from "@/components/activities/useTimeAwareness";
 import {
@@ -138,8 +139,9 @@ export default function ActivitiesPageClient({
             <motion.span
               animate={{ rotate: calendarOpen ? 180 : 0 }}
               transition={{ duration: 0.3 }}
+              className="flex items-center"
             >
-              ▾
+              <FiChevronDown size={14} />
             </motion.span>
           </button>
 
@@ -152,7 +154,7 @@ export default function ActivitiesPageClient({
               className="mt-2 overflow-hidden"
             >
               <SmartCalendar
-                events={activities}
+                eventDates={activities.map(a => a.startDate)}
                 selectedDate={selectedDate}
                 onSelectDate={handleSelectDate}
                 filterMode={filterMode}
@@ -177,7 +179,7 @@ export default function ActivitiesPageClient({
           <div className="hidden w-72 flex-shrink-0 lg:block xl:w-80">
             <div className="sticky top-28">
               <SmartCalendar
-                events={activities}
+                eventDates={activities.map(a => a.startDate)}
                 selectedDate={selectedDate}
                 onSelectDate={handleSelectDate}
                 filterMode={filterMode}

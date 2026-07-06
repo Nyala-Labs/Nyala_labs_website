@@ -1,7 +1,7 @@
 import { getAllTargetProfiles, getUpcomingScrapedEvents } from "@/lib/events-data";
 import EventsPageClient from "./EventsPageClient";
 
-export const revalidate = 60;
+export const dynamic = "force-dynamic";
 
 export const metadata = {
   title: "Events — Nyala Labs",

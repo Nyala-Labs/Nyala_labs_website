@@ -71,7 +71,6 @@ export interface Config {
     'blog-posts': BlogPost;
     'committee-members': CommitteeMember;
     activities: Activity;
-    news: News;
     media: Media;
     'payload-kv': PayloadKv;
     'payload-locked-documents': PayloadLockedDocument;
@@ -84,7 +83,6 @@ export interface Config {
     'blog-posts': BlogPostsSelect<false> | BlogPostsSelect<true>;
     'committee-members': CommitteeMembersSelect<false> | CommitteeMembersSelect<true>;
     activities: ActivitiesSelect<false> | ActivitiesSelect<true>;
-    news: NewsSelect<false> | NewsSelect<true>;
     media: MediaSelect<false> | MediaSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
@@ -282,34 +280,6 @@ export interface Activity {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "news".
- */
-export interface News {
-  id: number;
-  title: string;
-  slug: string;
-  body?: {
-    root: {
-      type: string;
-      children: {
-        type: any;
-        version: number;
-        [k: string]: unknown;
-      }[];
-      direction: ('ltr' | 'rtl') | null;
-      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-      indent: number;
-      version: number;
-    };
-    [k: string]: unknown;
-  } | null;
-  coverImage?: (number | null) | Media;
-  publishedAt: string;
-  updatedAt: string;
-  createdAt: string;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-kv".
  */
 export interface PayloadKv {
@@ -347,10 +317,6 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'activities';
         value: number | Activity;
-      } | null)
-    | ({
-        relationTo: 'news';
-        value: number | News;
       } | null)
     | ({
         relationTo: 'media';
@@ -471,19 +437,6 @@ export interface ActivitiesSelect<T extends boolean = true> {
         name?: T;
         id?: T;
       };
-  updatedAt?: T;
-  createdAt?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "news_select".
- */
-export interface NewsSelect<T extends boolean = true> {
-  title?: T;
-  slug?: T;
-  body?: T;
-  coverImage?: T;
-  publishedAt?: T;
   updatedAt?: T;
   createdAt?: T;
 }

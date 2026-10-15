@@ -33,7 +33,6 @@ const collections = [
   "blog-posts",
   "activities",
   "committee-members",
-  "news",
   "media",
 ];
 

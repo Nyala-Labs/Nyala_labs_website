@@ -10,7 +10,6 @@ import { s3Storage } from "@payloadcms/storage-s3";
 import { BlogPosts } from "./collections/BlogPosts";
 import { CommitteeMembers } from "./collections/CommitteeMembers";
 import { Activities } from "./collections/Activities";
-import { News } from "./collections/News";
 import { Media } from "./collections/Media";
 import { Users } from "./collections/Users";
 import { Homepage } from "./globals/Homepage";
@@ -43,7 +42,7 @@ export default buildConfig({
   ].filter(Boolean),
   secret: process.env.PAYLOAD_SECRET || "dev-payload-secret-change-me",
   editor: lexicalEditor(),
-  collections: [Users, BlogPosts, CommitteeMembers, Activities, News, Media],
+  collections: [Users, BlogPosts, CommitteeMembers, Activities, Media],
   globals: [Homepage],
   plugins: [
     s3Storage({

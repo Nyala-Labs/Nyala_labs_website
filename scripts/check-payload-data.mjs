@@ -30,7 +30,6 @@ const { default: config } = await import("../src/payload.config.ts");
 const payload = await getPayload({ config });
 
 const collections = [
-  "blog-posts",
   "activities",
   "committee-members",
   "media",

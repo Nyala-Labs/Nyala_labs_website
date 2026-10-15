@@ -1,17 +1,15 @@
 import { getHomepageData, getServerCollection } from "@/lib/payload";
-import { mapPayloadBlogPost, mapPayloadActivity } from "@/lib/cms-client";
+import { mapPayloadActivity } from "@/lib/cms-client";
 import HomePageClient from "./HomePageClient";
 
 export const revalidate = 60;
 
 export default async function HomePage() {
-  const [blogDocs, activityDocs, homepageData] = await Promise.all([
-    getServerCollection("blog-posts", { sort: "-publishedAt", limit: 3, depth: 1 }),
+  const [activityDocs, homepageData] = await Promise.all([
     getServerCollection("activities", { sort: "startDate", depth: 1 }),
     getHomepageData(),
   ]);
 
-  const latestPosts = blogDocs.map(mapPayloadBlogPost);
   const now = Date.now();
   const upcomingActivities = activityDocs
     .map(mapPayloadActivity)
@@ -20,7 +18,7 @@ export default async function HomePage() {
 
   return (
     <HomePageClient
-      latestPosts={latestPosts}
+      latestPosts={[]}
       upcomingActivities={upcomingActivities}
       heroMedia={homepageData.heroMedia}
     />

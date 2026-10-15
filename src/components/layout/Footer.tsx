@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 
 const footerLinks = [
   { href: "/about", label: "About Us" },
-  { href: "/blogs", label: "Blogs" },
+  { href: "/community", label: "Community" },
   { href: "/committee", label: "Committee" },
   { href: "/activities", label: "Activities" },
 ];

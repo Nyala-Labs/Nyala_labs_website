@@ -68,7 +68,6 @@ export interface Config {
   blocks: {};
   collections: {
     users: User;
-    'blog-posts': BlogPost;
     'committee-members': CommitteeMember;
     activities: Activity;
     media: Media;
@@ -80,7 +79,6 @@ export interface Config {
   collectionsJoins: {};
   collectionsSelect: {
     users: UsersSelect<false> | UsersSelect<true>;
-    'blog-posts': BlogPostsSelect<false> | BlogPostsSelect<true>;
     'committee-members': CommitteeMembersSelect<false> | CommitteeMembersSelect<true>;
     activities: ActivitiesSelect<false> | ActivitiesSelect<true>;
     media: MediaSelect<false> | MediaSelect<true>;
@@ -155,54 +153,18 @@ export interface User {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "blog-posts".
+ * via the `definition` "committee-members".
  */
-export interface BlogPost {
+export interface CommitteeMember {
   id: number;
-  title: string;
-  slug: string;
-  excerpt: string;
-  body?: {
-    root: {
-      type: string;
-      children: {
-        type: any;
-        version: number;
-        [k: string]: unknown;
-      }[];
-      direction: ('ltr' | 'rtl') | null;
-      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-      indent: number;
-      version: number;
-    };
-    [k: string]: unknown;
-  } | null;
-  coverImage: number | Media;
-  /**
-   * Byline shown on posts (use "Nyala Labs" for official updates unless crediting a named author).
-   */
-  author: string;
-  categories?:
-    | (
-        | 'hackathon'
-        | 'development'
-        | 'education'
-        | 'web3'
-        | 'design'
-        | 'ux'
-        | 'skills'
-        | 'community'
-        | 'open-source'
-        | 'events'
-        | 'recap'
-      )[]
-    | null;
-  publishedAt: string;
-  readingTime: number;
-  featured?: boolean | null;
+  name: string;
+  role: string;
+  image: number | Media;
+  bio: string;
+  linkedin?: string | null;
+  order: number;
   updatedAt: string;
   createdAt: string;
-  _status?: ('draft' | 'published') | null;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -232,21 +194,6 @@ export interface Media {
       filename?: string | null;
     };
   };
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "committee-members".
- */
-export interface CommitteeMember {
-  id: number;
-  name: string;
-  role: string;
-  image: number | Media;
-  bio: string;
-  linkedin?: string | null;
-  order: number;
-  updatedAt: string;
-  createdAt: string;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -305,10 +252,6 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'users';
         value: number | User;
-      } | null)
-    | ({
-        relationTo: 'blog-posts';
-        value: number | BlogPost;
       } | null)
     | ({
         relationTo: 'committee-members';
@@ -386,25 +329,6 @@ export interface UsersSelect<T extends boolean = true> {
         createdAt?: T;
         expiresAt?: T;
       };
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "blog-posts_select".
- */
-export interface BlogPostsSelect<T extends boolean = true> {
-  title?: T;
-  slug?: T;
-  excerpt?: T;
-  body?: T;
-  coverImage?: T;
-  author?: T;
-  categories?: T;
-  publishedAt?: T;
-  readingTime?: T;
-  featured?: T;
-  updatedAt?: T;
-  createdAt?: T;
-  _status?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema

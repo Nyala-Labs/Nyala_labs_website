@@ -7,7 +7,6 @@ import { postgresAdapter } from "@payloadcms/db-postgres";
 import { lexicalEditor } from "@payloadcms/richtext-lexical";
 import { s3Storage } from "@payloadcms/storage-s3";
 
-import { BlogPosts } from "./collections/BlogPosts";
 import { CommitteeMembers } from "./collections/CommitteeMembers";
 import { Activities } from "./collections/Activities";
 import { Media } from "./collections/Media";
@@ -42,7 +41,7 @@ export default buildConfig({
   ].filter(Boolean),
   secret: process.env.PAYLOAD_SECRET || "dev-payload-secret-change-me",
   editor: lexicalEditor(),
-  collections: [Users, BlogPosts, CommitteeMembers, Activities, Media],
+  collections: [Users, CommitteeMembers, Activities, Media],
   globals: [Homepage],
   plugins: [
     s3Storage({
@@ -85,14 +84,8 @@ export default buildConfig({
       baseDir: path.resolve(dirname),
     },
     livePreview: {
-      url: ({ data }) => {
-        const base = serverURL;
-        if (data?.slug) {
-          return `${base}/blogs/${data.slug}`;
-        }
-        return base;
-      },
-      collections: ["blog-posts"],
+      url: () => serverURL,
+      collections: [],
       breakpoints: [
         { label: "Mobile", name: "mobile", width: 375, height: 667 },
         { label: "Tablet", name: "tablet", width: 768, height: 1024 },

@@ -127,7 +127,7 @@ export default function HomePageClient({
 
       <AnimatedDivider />
 
-      {/* ─── latest blogs ────────────────────────── */}
+      {/* ─── latest from the trail ───────────────── */}
       <section className="bg-nyala-black py-24">
         <div className="mx-auto max-w-7xl px-6">
           <div className="mb-12 flex items-end justify-between">
@@ -138,7 +138,7 @@ export default function HomePageClient({
             />
             <ScrollReveal delay={0.3}>
               <a
-                href="/blogs"
+                href="/community"
                 className="hidden font-mono text-xs uppercase tracking-widest text-nyala-gray-muted transition-colors hover:text-nyala-red md:block"
               >
                 View All →
@@ -154,16 +154,16 @@ export default function HomePageClient({
             </div>
           ) : (
             <p className="font-mono text-xs text-nyala-gray-muted">
-              No blog posts published yet.
+              No community posts published yet.
             </p>
           )}
 
           <div className="mt-8 text-center md:hidden">
             <a
-              href="/blogs"
+              href="/community"
               className="font-mono text-xs uppercase tracking-widest text-nyala-gray-muted transition-colors hover:text-nyala-red"
             >
-              View all posts →
+              View community →
             </a>
           </div>
         </div>

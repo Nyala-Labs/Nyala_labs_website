@@ -103,27 +103,21 @@ export default function HomePageClient({
           />
 
           {isDesktop ? (
-              <motion.div
-                variants={staggerContainer}
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true, margin: "-50px" }}
-                className="grid gap-6 md:grid-cols-3"
-              >
-                <motion.div variants={fadeUp} custom={0}>
-                  <HackathonActivityCard />
+            <motion.div
+              variants={staggerContainer}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, margin: "-50px" }}
+              className="grid gap-6 md:grid-cols-3"
+            >
+              {upcomingActivities.map((activity, i) => (
+                <motion.div key={activity._id} variants={fadeUp} custom={i}>
+                  <ActivityCard activity={activity} />
                 </motion.div>
-                {upcomingActivities.map((activity, i) => (
-                  <motion.div key={activity._id} variants={fadeUp} custom={i + 1}>
-                    <ActivityCard activity={activity} />
-                  </motion.div>
-                ))}
-              </motion.div>
+              ))}
+            </motion.div>
           ) : (
             <div className="grid gap-6">
-              <div className="reveal-up">
-                <HackathonActivityCard />
-              </div>
               {upcomingActivities.map((activity, i) => (
                 <div key={activity._id} className="reveal-up" style={{ animationDelay: `${i * 0.1}s` }}>
                   <ActivityCard activity={activity} />
@@ -270,36 +264,6 @@ export default function HomePageClient({
         </div>
       </section>
     </>
-  );
-}
-
-function HackathonActivityCard() {
-  return (
-    <div className="group relative overflow-hidden border border-nyala-gray-light bg-nyala-gray p-6 transition-all duration-500 hover:-translate-y-2 hover:border-nyala-red/50 hover:shadow-[0_0_30px_rgba(198,40,40,0.1)]">
-      <div className="pointer-events-none absolute inset-x-0 bottom-0 h-1 w-[200%] bg-gradient-to-r from-nyala-red via-nyala-yellow to-nyala-red opacity-0 transition-opacity duration-500 group-hover:animate-shimmer group-hover:opacity-100" />
-      <div className="relative z-10 mb-4 flex items-center gap-3">
-        <span className="inline-block h-2 w-2 rounded-full bg-nyala-red" />
-        <span className="font-mono text-[10px] uppercase tracking-widest text-nyala-red">
-          featured
-        </span>
-      </div>
-      <h3 className="font-mono text-lg font-semibold text-nyala-white">
-        SunFest 2026: Harvest of Wonders
-      </h3>
-      <p className="mt-2 font-mono text-xs leading-relaxed text-nyala-gray-muted">
-        Community festival with NGO booths, interactive games, QR-based activities, and a special opening ceremony.
-      </p>
-      <div className="mt-4 space-y-1 font-mono text-[10px] text-nyala-gray-muted">
-        <div className="flex items-center gap-2">
-          <span className="text-nyala-yellow">📅</span>
-          <span>July 7 - 10, 2026</span>
-        </div>
-        <div className="flex items-center gap-2">
-          <span className="text-nyala-yellow">📍</span>
-          <span>Sunway College Building, Observation Deck & Booth Zones</span>
-        </div>
-      </div>
-    </div>
   );
 }
 

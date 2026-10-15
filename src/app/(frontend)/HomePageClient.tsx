@@ -11,25 +11,17 @@ import PartnershipsSection from "@/components/partnerships/PartnershipsSection";
 import { formatDate } from "@/lib/utils";
 import { getEventStatus } from "@/lib/event-utils";
 import { staggerContainer, fadeUp } from "@/lib/animations";
-import type { Activity, BlogPost, HeroMediaItem, HighlightItem } from "@/types";
-
-const defaultHighlightCaptions = [
-  "hackathon night",
-  "team workshop",
-  "community meetup",
-];
+import type { Activity, BlogPost, HeroMediaItem } from "@/types";
 
 interface HomePageClientProps {
   latestPosts: BlogPost[];
   upcomingActivities: Activity[];
-  highlights: HighlightItem[];
   heroMedia: HeroMediaItem[];
 }
 
 export default function HomePageClient({
   latestPosts,
   upcomingActivities,
-  highlights,
   heroMedia,
 }: HomePageClientProps) {
   const [isDesktop, setIsDesktop] = useState(false);
@@ -179,43 +171,6 @@ export default function HomePageClient({
 
       <AnimatedDivider />
 
-      {/* ─── highlight moments ───────────────────── */}
-      <section className="bg-nyala-black py-24">
-        <div className="mx-auto max-w-7xl px-6">
-          <SectionHeading
-            title="highlight moments"
-            subtitle="snapshots from our journey"
-            align="center"
-          />
-
-          {isDesktop ? (
-            <motion.div
-              variants={staggerContainer}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true }}
-              className="grid grid-cols-2 gap-3 md:grid-cols-4"
-            >
-              {highlights.slice(0, 4).map((item, n) => (
-                <motion.div key={n} variants={fadeUp} custom={n}>
-                  <HighlightCard item={item} index={n} />
-                </motion.div>
-              ))}
-            </motion.div>
-          ) : (
-            <div className="grid grid-cols-2 gap-3">
-              {highlights.slice(0, 4).map((item, n) => (
-                <div key={n} className="scale-in" style={{ animationDelay: `${n * 0.08}s` }}>
-                  <HighlightCard item={item} index={n} />
-                </div>
-              ))}
-            </div>
-          )}
-        </div>
-      </section>
-
-      <AnimatedDivider />
-
       {/* ─── partnerships ────────────────────────────── */}
       <PartnershipsSection />
 
@@ -288,26 +243,6 @@ function ActivityCard({ activity }: { activity: Activity }) {
           <span className="text-nyala-yellow">📍</span>
           <span>{activity.location}</span>
         </div>
-      </div>
-    </div>
-  );
-}
-
-function HighlightCard({ item, index }: { item: HighlightItem; index: number }) {
-  return (
-    <div className="group relative aspect-square overflow-hidden border border-nyala-gray-light bg-nyala-gray transition-all duration-500 hover:-translate-y-2 hover:border-nyala-white/20 hover:shadow-[0_20px_40px_-15px_rgba(0,0,0,0.7)]">
-      <div
-        className="h-full w-full bg-cover bg-center transition-transform duration-700 group-hover:scale-110"
-        style={{
-          backgroundImage: item.image ? `url(${item.image})` : undefined,
-          filter: "brightness(0.6)",
-        }}
-      />
-      <div className="absolute inset-0 bg-gradient-to-t from-nyala-black/80 via-transparent to-transparent" />
-      <div className="absolute inset-0 flex items-end p-4">
-        <span className="font-mono text-xs text-nyala-white opacity-0 transition-opacity duration-300 group-hover:opacity-100">
-          {item.caption || defaultHighlightCaptions[index] || ""}
-        </span>
       </div>
     </div>
   );

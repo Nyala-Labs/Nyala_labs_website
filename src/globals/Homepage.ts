@@ -36,29 +36,5 @@ export const Homepage: GlobalConfig = {
         },
       ],
     },
-    {
-      name: "highlights",
-      type: "array",
-      label: "Highlight Moments",
-      admin: {
-        description: "Images for the highlight moments section on the homepage.",
-      },
-      fields: [
-        {
-          name: "image",
-          type: "upload",
-          relationTo: "media",
-          required: true,
-        },
-        {
-          name: "caption",
-          type: "text",
-          required: false,
-          admin: {
-            description: "Caption shown on hover (e.g. 'hackathon night')",
-          },
-        },
-      ],
-    },
   ],
 };

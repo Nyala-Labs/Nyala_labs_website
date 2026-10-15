@@ -534,19 +534,6 @@ export interface Homepage {
         id?: string | null;
       }[]
     | null;
-  /**
-   * Images for the highlight moments section on the homepage.
-   */
-  highlights?:
-    | {
-        image: number | Media;
-        /**
-         * Caption shown on hover (e.g. 'hackathon night')
-         */
-        caption?: string | null;
-        id?: string | null;
-      }[]
-    | null;
   updatedAt?: string | null;
   createdAt?: string | null;
 }
@@ -560,13 +547,6 @@ export interface HomepageSelect<T extends boolean = true> {
     | {
         media?: T;
         alt?: T;
-        id?: T;
-      };
-  highlights?:
-    | T
-    | {
-        image?: T;
-        caption?: T;
         id?: T;
       };
   updatedAt?: T;

@@ -2,7 +2,7 @@ import { getPayload } from "payload";
 import config from "@payload-config";
 import type { CollectionSlug, GlobalSlug } from "payload";
 import type { HomepageData } from "@/lib/cms-client";
-import type { HeroMediaItem, HighlightItem } from "@/types";
+import type { HeroMediaItem } from "@/types";
 
 export const getPayloadClient = async () => getPayload({ config });
 
@@ -43,7 +43,6 @@ export const getHomepageData = async (): Promise<HomepageData> => {
       depth: 1,
     })) as {
       heroMedia?: Array<{ media?: unknown; alt?: string }>;
-      highlights?: Array<{ image?: unknown; caption?: string }>;
     };
 
     const heroMedia: HeroMediaItem[] = (data.heroMedia || [])
@@ -55,15 +54,9 @@ export const getHomepageData = async (): Promise<HomepageData> => {
       }))
       .filter((item) => Boolean(item.src));
 
-    const defaultCaptions = ["hackathon night", "team workshop", "community meetup", "tech summit"];
-    const highlights: HighlightItem[] = (data.highlights || []).map((item, i) => ({
-      image: resolveMediaUrl(item.image),
-      caption: item.caption || defaultCaptions[i] || "",
-    }));
-
-    return { heroMedia, highlights };
+    return { heroMedia };
   } catch {
-    return { heroMedia: [], highlights: [] };
+    return { heroMedia: [] };
   }
 };
 

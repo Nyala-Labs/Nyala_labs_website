@@ -104,8 +104,3 @@ export type HeroMediaItem = {
   src: string;
   alt?: string;
 };
-
-export type HighlightItem = {
-  image: string;
-  caption?: string;
-};

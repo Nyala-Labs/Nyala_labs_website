@@ -3,7 +3,6 @@ import type {
   BlogPost,
   CommitteeMember,
   HeroMediaItem,
-  HighlightItem,
 } from "@/types";
 
 const TIMEOUTS = {
@@ -63,7 +62,6 @@ const isVideo = (media: unknown): boolean => {
 
 export type HomepageData = {
   heroMedia: HeroMediaItem[];
-  highlights: HighlightItem[];
 };
 
 export const fetchHomepage = async (): Promise<HomepageData> => {
@@ -71,14 +69,13 @@ export const fetchHomepage = async (): Promise<HomepageData> => {
   try {
     response = await fetchWithTimeout("/api/globals/homepage?depth=1", TIMEOUTS.critical);
   } catch {
-    return { heroMedia: [], highlights: [] };
+    return { heroMedia: [] };
   }
   if (!response.ok) {
-    return { heroMedia: [], highlights: [] };
+    return { heroMedia: [] };
   }
   const data = (await response.json()) as {
     heroMedia?: Array<{ media?: unknown; alt?: string }>;
-    highlights?: Array<{ image?: unknown; caption?: string }>;
   };
 
   const heroMedia: HeroMediaItem[] = (data.heroMedia || [])
@@ -91,20 +88,7 @@ export const fetchHomepage = async (): Promise<HomepageData> => {
     })
     .filter((item) => Boolean(item.src));
 
-  const defaultCaptions = [
-    "hackathon night",
-    "team workshop",
-    "community meetup",
-    "tech summit",
-  ];
-  const highlights: HighlightItem[] = (data.highlights || []).map(
-    (item, i) => ({
-      image: resolveImageUrl(item.image, ""),
-      caption: item.caption || defaultCaptions[i] || "",
-    })
-  );
-
-  return { heroMedia, highlights };
+  return { heroMedia };
 };
 
 export const fetchPayloadCollection = async <T extends PayloadDoc>(

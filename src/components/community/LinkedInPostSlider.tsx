@@ -129,7 +129,7 @@ export default function LinkedInPostSlider({ posts }: LinkedInPostSliderProps) {
               ref={(element) => {
                 cardRefs.current[index] = element;
               }}
-              className={`group relative w-[calc(100%_-_0.5rem)] shrink-0 snap-start overflow-hidden rounded-2xl border border-nyala-gray-light bg-nyala-gray p-6 font-sans transition-[border-color,box-shadow] hover:border-nyala-yellow/70 hover:shadow-[0_0_25px_rgba(251,192,45,0.1)] sm:w-[calc(50%_-_1rem)] lg:w-[calc(33.333%_-_1.333rem)] ${post.url ? "cursor-pointer" : ""}`}
+              className={`group relative w-[calc(100%_-_0.5rem)] shrink-0 snap-start overflow-hidden rounded-2xl border border-nyala-gray-light bg-nyala-gray p-6 font-sans transition-[border-color,box-shadow] hover:border-nyala-yellow/70 hover:shadow-[0_0_25px_rgba(251,192,45,0.1)] sm:w-[calc(50%_-_1rem)] lg:w-[calc(28.571%_-_2rem)] ${post.url ? "cursor-pointer" : ""}`}
             >
               <div className="relative aspect-[1.35/1] overflow-hidden rounded-2xl bg-nyala-gray">
                 {post.imageUrl ? (

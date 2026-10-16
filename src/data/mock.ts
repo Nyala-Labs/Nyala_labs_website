@@ -1,4 +1,4 @@
-import type { BlogPost, CommitteeMember, Activity, TimelineEntry, Aim } from "@/types";
+import type { CommitteeMember, Activity, TimelineEntry, Aim } from "@/types";
 
 export const taglines = [
   "Blaze The Trail",
@@ -12,82 +12,6 @@ export const heroMedia = [
   { type: "image" as const, src: "/images/hero-1.jpg", alt: "Nyala Labs hackathon" },
   { type: "image" as const, src: "/images/hero-2.jpg", alt: "Nyala Labs workshop" },
   { type: "image" as const, src: "/images/hero-3.jpg", alt: "Nyala Labs community event" },
-];
-
-export const mockBlogPosts: BlogPost[] = [
-  {
-    _id: "1",
-    title: "How we built our first hackathon project in 48 hours",
-    slug: "First-hackathon-project",
-    excerpt:
-      "A behind-the-scenes look at our team's journey through sleepless nights, countless bugs, and the thrill of shipping something real.",
-    coverImage: "/images/blog-1.jpg",
-    author: "Nyala Labs",
-    categories: ["Hackathon", "Development"],
-    publishedAt: "2025-12-15",
-    readingTime: 5,
-    featured: true,
-  },
-  {
-    _id: "2",
-    title: "Introduction to Web3: A Beginner's Roadmap",
-    slug: "intro-to-web3",
-    excerpt:
-      "Breaking down the fundamentals of blockchain, smart contracts, and decentralized applications for newcomers.",
-    coverImage: "/images/blog-2.jpg",
-    author: "Tech Division",
-    categories: ["Education", "Web3"],
-    publishedAt: "2025-11-20",
-    readingTime: 8,
-  },
-  {
-    _id: "3",
-    title: "Designing UI that doesn't suck: Lessons from our redesign",
-    slug: "UI-Redesign-Lessons",
-    excerpt:
-      "What we learned when we threw out our entire design system and started from scratch.",
-    coverImage: "/images/blog-3.jpg",
-    author: "Design Team",
-    categories: ["Design", "UX"],
-    publishedAt: "2025-10-05",
-    readingTime: 6,
-  },
-  {
-    _id: "4",
-    title: "The Art of Technical Presentations",
-    slug: "Technical-Presentations",
-    excerpt:
-      "Tips and tricks for delivering impactful tech talks that actually keep your audience awake.",
-    coverImage: "/images/blog-4.jpg",
-    author: "Nyala Labs",
-    categories: ["Skills", "Community"],
-    publishedAt: "2025-09-18",
-    readingTime: 4,
-  },
-  {
-    _id: "5",
-    title: "Open Source Contributions: Getting Started",
-    slug: "open-source-guide",
-    excerpt:
-      "Your first pull request doesn't have to be terrifying. Here's how to start contributing to open source.",
-    coverImage: "/images/blog-5.jpg",
-    author: "Dev Team",
-    categories: ["Development", "Open-Source"],
-    publishedAt: "2025-08-22",
-    readingTime: 7,
-  },
-  {
-    _id: "6",
-    title: "Recap: Nyala Labs Tech Summit 2025",
-    slug: "Tech-Summit-Recap",
-    excerpt:
-      "Highlights from our biggest event yet — featuring industry speakers, workshops, and a lot of pizza.",
-    coverImage: "/images/blog-6.jpg",
-    author: "Events Team",
-    categories: ["Events", "Recap"],
-    publishedAt: "2025-07-10",
-    readingTime: 5,
-  },
 ];
 
 export const mockCommittee: CommitteeMember[] = [
@@ -273,19 +197,4 @@ export const aims: Aim[] = [
       "Explore emerging technology with care—AI, blockchain, IoT—and ask not only what we can build, but what we should build for people.",
     icon: "/images/icons/innovate.png",
   },
-];
-
-export const allCategories = [
-  "all",
-  "hackathon",
-  "development",
-  "education",
-  "web3",
-  "design",
-  "ux",
-  "skills",
-  "community",
-  "open-source",
-  "events",
-  "recap",
 ];

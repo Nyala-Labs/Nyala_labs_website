@@ -1,8 +1,76 @@
 import clientPromise from "@/lib/mongodb";
-import type { ScrapedEvent } from "@/types";
+import type { LinkedInPost, ScrapedEvent } from "@/types";
 
 const DB_NAME = "luma_monitor";
 const COLLECTION_NAME = "events";
+const LINKEDIN_DB_NAME = "linkedin_post";
+const LINKEDIN_COLLECTION_NAME = "linkedin_posts";
+
+function safeHttpUrl(value: unknown): string {
+  if (typeof value !== "string" || !value.trim()) return "";
+  try {
+    const url = new URL(value);
+    return url.protocol === "https:" || url.protocol === "http:" ? url.toString() : "";
+  } catch {
+    return "";
+  }
+}
+
+export async function getLatestLinkedInPosts(limit = 5): Promise<LinkedInPost[]> {
+  try {
+    const client = await clientPromise;
+    const docs = await client
+      .db(LINKEDIN_DB_NAME)
+      .collection(LINKEDIN_COLLECTION_NAME)
+      .aggregate([
+        {
+          $addFields: {
+            publishedAtDate: {
+              $convert: {
+                input: "$publishedAt",
+                to: "date",
+                onError: null,
+                onNull: null,
+              },
+            },
+          },
+        },
+        { $match: { publishedAtDate: { $ne: null } } },
+        { $sort: { publishedAtDate: -1 } },
+        { $limit: limit },
+        {
+          $project: {
+            text: 1,
+            publishedAtDate: 1,
+            url: 1,
+            firstImageUrl: 1,
+          },
+        },
+      ])
+      .toArray();
+
+    return docs.flatMap((doc) => {
+      const publishedAt =
+        doc.publishedAtDate instanceof Date
+          ? doc.publishedAtDate.toISOString()
+          : "";
+      if (!publishedAt) return [];
+
+      return [
+        {
+          id: String(doc._id),
+          text: typeof doc.text === "string" ? doc.text : "",
+          publishedAt,
+          url: safeHttpUrl(doc.url),
+          imageUrl: safeHttpUrl(doc.firstImageUrl) || null,
+        },
+      ];
+    });
+  } catch (err) {
+    console.error("getLatestLinkedInPosts failed:", err);
+    return [];
+  }
+}
 
 function mapDoc(doc: Record<string, any>): ScrapedEvent {
   return {

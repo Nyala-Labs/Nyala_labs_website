@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import HeroVideoSection from "@/components/hero/HeroVideoSection";
-import BlogCard from "@/components/blog/BlogCard";
+import LinkedInPostSlider from "@/components/community/LinkedInPostSlider";
 import SectionHeading from "@/components/ui/SectionHeading";
 import AnimatedDivider from "@/components/ui/AnimatedDivider";
 import ScrollReveal from "@/components/ui/ScrollReveal";
@@ -11,16 +11,16 @@ import PartnershipsSection from "@/components/partnerships/PartnershipsSection";
 import { formatDate } from "@/lib/utils";
 import { getEventStatus } from "@/lib/event-utils";
 import { staggerContainer, fadeUp } from "@/lib/animations";
-import type { Activity, BlogPost, HeroMediaItem } from "@/types";
+import type { Activity, HeroMediaItem, LinkedInPost } from "@/types";
 
 interface HomePageClientProps {
-  latestPosts: BlogPost[];
+  linkedinPosts: LinkedInPost[];
   upcomingActivities: Activity[];
   heroMedia: HeroMediaItem[];
 }
 
 export default function HomePageClient({
-  latestPosts,
+  linkedinPosts,
   upcomingActivities,
   heroMedia,
 }: HomePageClientProps) {
@@ -128,12 +128,12 @@ export default function HomePageClient({
       <AnimatedDivider />
 
       {/* ─── latest from the trail ───────────────── */}
-      <section className="bg-nyala-black py-24">
+      <section className="bg-nyala-black pb-12 pt-24">
         <div className="mx-auto max-w-7xl px-6">
           <div className="mb-12 flex items-end justify-between">
             <SectionHeading
               title="latest from the trail"
-              subtitle="stories, guides, and insights from the community"
+              subtitle="updates, ideas, and moments shared by our community"
               className="mb-0"
             />
             <ScrollReveal delay={0.3}>
@@ -146,24 +146,14 @@ export default function HomePageClient({
             </ScrollReveal>
           </div>
 
-          {latestPosts.length > 0 ? (
-            <div className="grid gap-6 md:grid-cols-3">
-              {latestPosts.map((post, i) => (
-                <BlogCard key={post._id} post={post} index={i} />
-              ))}
-            </div>
-          ) : (
-            <p className="font-mono text-xs text-nyala-gray-muted">
-              No community posts published yet.
-            </p>
-          )}
+          <LinkedInPostSlider posts={linkedinPosts} />
 
           <div className="mt-8 text-center md:hidden">
             <a
               href="/community"
               className="font-mono text-xs uppercase tracking-widest text-nyala-gray-muted transition-colors hover:text-nyala-red"
             >
-              View community →
+              Visit community →
             </a>
           </div>
         </div>

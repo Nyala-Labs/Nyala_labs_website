@@ -47,19 +47,6 @@ export type Aim = {
   icon: string;
 };
 
-export type BlogPost = {
-  _id: string;
-  title: string;
-  slug: string;
-  excerpt: string;
-  coverImage: string;
-  author: string;
-  categories: string[];
-  publishedAt: string;
-  readingTime: number;
-  featured?: boolean;
-};
-
 export type CommitteeMember = {
   _id: string;
   name: string;
@@ -103,4 +90,12 @@ export type HeroMediaItem = {
   type: "image" | "video";
   src: string;
   alt?: string;
+};
+
+export type LinkedInPost = {
+  id: string;
+  text: string;
+  publishedAt: string;
+  url: string;
+  imageUrl: string | null;
 };

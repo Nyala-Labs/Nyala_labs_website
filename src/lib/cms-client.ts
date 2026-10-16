@@ -1,6 +1,5 @@
 import type {
   Activity,
-  BlogPost,
   CommitteeMember,
   HeroMediaItem,
 } from "@/types";
@@ -34,7 +33,6 @@ type PayloadListResponse<T extends PayloadDoc> = {
   docs?: T[];
 };
 
-const placeholderBlogImage = "/images/blog-1.jpg";
 const placeholderCommitteeImage = "/images/committee/member-1.jpg";
 const placeholderActivityImage = "/images/activity-1.jpg";
 
@@ -108,19 +106,6 @@ export const fetchPayloadCollection = async <T extends PayloadDoc>(
   const data = (await response.json()) as PayloadListResponse<T>;
   return data.docs || [];
 };
-
-export const mapPayloadBlogPost = (doc: PayloadDoc): BlogPost => ({
-  _id: String(doc.id || ""),
-  title: String(doc.title || ""),
-  slug: String(doc.slug || ""),
-  excerpt: String(doc.excerpt || ""),
-  coverImage: resolveImageUrl(doc.coverImage, placeholderBlogImage),
-  author: String(doc.author || "Nyala Labs"),
-  categories: Array.isArray(doc.categories) ? (doc.categories as string[]) : [],
-  publishedAt: parseIsoDate(doc.publishedAt),
-  readingTime: Number(doc.readingTime || 1),
-  featured: Boolean(doc.featured),
-});
 
 export const mapPayloadCommitteeMember = (doc: PayloadDoc): CommitteeMember => ({
   _id: String(doc.id || ""),

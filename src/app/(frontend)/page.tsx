@@ -1,13 +1,15 @@
 import { getHomepageData, getServerCollection } from "@/lib/payload";
 import { mapPayloadActivity } from "@/lib/cms-client";
+import { getLatestLinkedInPosts } from "@/lib/events-data";
 import HomePageClient from "./HomePageClient";
 
 export const revalidate = 60;
 
 export default async function HomePage() {
-  const [activityDocs, homepageData] = await Promise.all([
+  const [activityDocs, homepageData, linkedinPosts] = await Promise.all([
     getServerCollection("activities", { sort: "startDate", depth: 1 }),
     getHomepageData(),
+    getLatestLinkedInPosts(5),
   ]);
 
   const now = Date.now();
@@ -18,7 +20,7 @@ export default async function HomePage() {
 
   return (
     <HomePageClient
-      latestPosts={[]}
+      linkedinPosts={linkedinPosts}
       upcomingActivities={upcomingActivities}
       heroMedia={homepageData.heroMedia}
     />

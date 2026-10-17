@@ -1,3 +1,4 @@
+
 "use client";
 
 import { useEffect, useState } from "react";
@@ -5,6 +6,7 @@ import type { ReactNode } from "react";
 
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
+import WhatsAppButton from "@/components/layout/WhatsAppButton";
 import GrainOverlay from "@/components/ui/GrainOverlay";
 import SplashCursor from "@/components/ui/SplashCursor";
 
@@ -26,6 +28,7 @@ export default function SiteShell({ children }: SiteShellProps) {
       <Navbar />
       <main className="relative z-0 min-h-screen">{children}</main>
       <Footer />
+      <WhatsAppButton />
     </>
   );
 }

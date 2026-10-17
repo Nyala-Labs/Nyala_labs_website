@@ -24,7 +24,7 @@ function safeHttpUrls(value: unknown): string[] {
   });
 }
 
-export async function getLatestLinkedInPosts(limit = 5): Promise<LinkedInPost[]> {
+export async function getLatestLinkedInPosts(limit?: number): Promise<LinkedInPost[]> {
   try {
     const client = await clientPromise;
     const docs = await client
@@ -45,7 +45,7 @@ export async function getLatestLinkedInPosts(limit = 5): Promise<LinkedInPost[]>
         },
         { $match: { publishedAtDate: { $ne: null } } },
         { $sort: { publishedAtDate: -1 } },
-        { $limit: limit },
+        ...(limit === undefined ? [] : [{ $limit: limit }]),
         {
           $project: {
             text: 1,
@@ -87,6 +87,11 @@ export async function getLatestLinkedInPosts(limit = 5): Promise<LinkedInPost[]>
     console.error("getLatestLinkedInPosts failed:", err);
     return [];
   }
+
+}
+
+export async function getAllLinkedInPosts(): Promise<LinkedInPost[]> {
+  return getLatestLinkedInPosts();
 }
 
 function mapDoc(doc: Record<string, any>): ScrapedEvent {

@@ -16,6 +16,14 @@ function safeHttpUrl(value: unknown): string {
   }
 }
 
+function safeHttpUrls(value: unknown): string[] {
+  if (!Array.isArray(value)) return [];
+  return value.flatMap((item) => {
+    const url = safeHttpUrl(item);
+    return url ? [url] : [];
+  });
+}
+
 export async function getLatestLinkedInPosts(limit = 5): Promise<LinkedInPost[]> {
   try {
     const client = await clientPromise;
@@ -44,6 +52,8 @@ export async function getLatestLinkedInPosts(limit = 5): Promise<LinkedInPost[]>
             publishedAtDate: 1,
             url: 1,
             firstImageUrl: 1,
+            imageUrls: 1,
+            images: 1,
           },
         },
       ])
@@ -56,13 +66,20 @@ export async function getLatestLinkedInPosts(limit = 5): Promise<LinkedInPost[]>
           : "";
       if (!publishedAt) return [];
 
+      const imageUrls = [
+        ...safeHttpUrls(doc.imageUrls),
+        ...safeHttpUrls(doc.images),
+        ...safeHttpUrls([doc.firstImageUrl]),
+      ].filter((imageUrl, index, urls) => urls.indexOf(imageUrl) === index);
+
       return [
         {
           id: String(doc._id),
           text: typeof doc.text === "string" ? doc.text : "",
           publishedAt,
           url: safeHttpUrl(doc.url),
-          imageUrl: safeHttpUrl(doc.firstImageUrl) || null,
+          imageUrl: imageUrls[0] || null,
+          imageUrls,
         },
       ];
     });

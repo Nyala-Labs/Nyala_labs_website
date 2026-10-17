@@ -57,8 +57,13 @@ export default function LinkedInPostSlider({ posts }: LinkedInPostSliderProps) {
   const cardRefs = useRef<Array<HTMLElement | null>>([]);
   const resetTimeout = useRef<ReturnType<typeof setTimeout> | null>(null);
   const [selectedPost, setSelectedPost] = useState<LinkedInPost | null>(null);
+  const [selectedImageIndex, setSelectedImageIndex] = useState(0);
 
   const closePost = useCallback(() => setSelectedPost(null), []);
+  const openPost = (post: LinkedInPost) => {
+    setSelectedPost(post);
+    setSelectedImageIndex(0);
+  };
 
   useEffect(() => {
     if (!selectedPost) return;
@@ -211,7 +216,7 @@ export default function LinkedInPostSlider({ posts }: LinkedInPostSliderProps) {
               </div>
               <button
                 type="button"
-                onClick={() => setSelectedPost(post)}
+                onClick={() => openPost(post)}
                 aria-label={`Read full LinkedIn post${post.url ? "" : " (LinkedIn link unavailable)"}`}
                 className="absolute inset-0 z-10 cursor-pointer rounded-2xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-nyala-yellow"
               />
@@ -256,13 +261,39 @@ export default function LinkedInPostSlider({ posts }: LinkedInPostSliderProps) {
             </button>
 
             <div className="grid md:grid-cols-[minmax(0,1fr)_minmax(0,1fr)]">
-              <div className="flex min-h-64 items-center justify-center bg-nyala-black md:min-h-[32rem]">
-                {selectedPost.imageUrl ? (
-                  <img
-                    src={selectedPost.imageUrl}
-                    alt="Image from Nyala Labs LinkedIn post"
-                    className="max-h-[70vh] w-full object-contain"
-                  />
+              <div className="relative flex min-h-64 items-center justify-center bg-nyala-black md:min-h-[32rem]">
+                {selectedPost.imageUrls.length > 0 ? (
+                  <>
+                    <img
+                      src={selectedPost.imageUrls[selectedImageIndex]}
+                      alt={`Image ${selectedImageIndex + 1} of ${selectedPost.imageUrls.length} from Nyala Labs LinkedIn post`}
+                      className="max-h-[70vh] w-full object-contain"
+                    />
+                    {selectedPost.imageUrls.length > 1 && (
+                      <>
+                        {selectedImageIndex > 0 && (
+                          <button
+                            type="button"
+                            onClick={() => setSelectedImageIndex(selectedImageIndex - 1)}
+                            aria-label="Show previous post image"
+                            className="absolute left-3 top-1/2 grid h-10 w-10 -translate-y-1/2 place-items-center rounded-full border border-nyala-gray-light bg-nyala-black/80 text-nyala-white transition-colors hover:border-nyala-yellow hover:text-nyala-yellow"
+                          >
+                            <ChevronLeft aria-hidden="true" className="h-5 w-5" />
+                          </button>
+                        )}
+                        {selectedImageIndex < selectedPost.imageUrls.length - 1 && (
+                          <button
+                            type="button"
+                            onClick={() => setSelectedImageIndex(selectedImageIndex + 1)}
+                            aria-label="Show next post image"
+                            className="absolute right-3 top-1/2 grid h-10 w-10 -translate-y-1/2 place-items-center rounded-full border border-nyala-gray-light bg-nyala-black/80 text-nyala-white transition-colors hover:border-nyala-yellow hover:text-nyala-yellow"
+                          >
+                            <ChevronRight aria-hidden="true" className="h-5 w-5" />
+                          </button>
+                        )}
+                      </>
+                    )}
+                  </>
                 ) : (
                   <span className="text-5xl text-nyala-yellow/70">N</span>
                 )}

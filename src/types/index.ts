@@ -98,4 +98,5 @@ export type LinkedInPost = {
   publishedAt: string;
   url: string;
   imageUrl: string | null;
+  imageUrls: string[];
 };
